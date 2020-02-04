@@ -1,22 +1,37 @@
 <template>
     <div id="app">
-        <router-view/>
+        <router-view v-if="data != null"/>
     </div>
 </template>
 
 <script>
-    import json from '@/data.json'
+    import axios from 'axios'
 
     export default {
         created() {
-            document.addEventListener("contextmenu", function (e) {
-                e.preventDefault();
-            }, false)
+            this.preventContextMenu()
+            this.getData()
         },
         data() {
             return {
-                data: json,
+                data: null,
                 selected_user: null
+            }
+        },
+        methods: {
+            preventContextMenu() {
+                document.addEventListener("contextmenu", function (e) {
+                    e.preventDefault();
+                }, false)
+            },
+            getData() {
+                const path = 'http://100.124.99.212:5000/data'
+                axios.get(path).then((res) => {
+                    this.data = res.data
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
             }
         }
     }
