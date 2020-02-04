@@ -1,5 +1,5 @@
 <template>
-    <div class="item-selection">
+    <div id="item-selection">
         <b-row class="item-bar flex-nowrap m-0 px-2">
             <b-card no-body v-for="item in data.items" :key="item.barcode" class="item-container mx-2 my-4 shadow"
                     @click="addItem(item)">
@@ -47,24 +47,22 @@
                         </template>
                     </b-table>
                     <div v-else class="d-flex flex-column empty-cart">
-                        <h5>Dein Einkaufswagen ist leer.</h5>
-                        <p>Wähle Produkte aus,
-                            indem du sie oben antippst oder ihren Barcode scannst.</p>
-                        <b-img class="gif"
-                               :src="'@assets/images/gifs/' + this.gifs[Math.floor(Math.random()*(this.gifs.length-1))]"/>
+                        <h5>Your shopping cart is empty.</h5>
+                        <p>Select products by picking them above or scanning their barcodes.</p>
+                        <div class="gif shadow" v-bind:style="{ 'background-image': 'url(' + gif + ')' }" />
                     </div>
                 </b-card>
             </b-col>
             <b-col class="pl-0">
                 <b-card no-body class="shadow expand">
                     <b-card-body class="d-flex flex-column">
-                        <h1>Gesamt: {{formatPrice(getTotal())}}</h1>
-                        <h4 class="text-muted my-auto">Mahamomandalanta<br>Guthaben: -4,00€</h4>
-                        <b-form-checkbox size="lg" v-model="guest">Als Gast markieren
+                        <h1>Total: {{formatPrice(getTotal())}}</h1>
+                        <h4 class="text-muted my-auto">Mahamomandalanta<br>Balance: -4,00€</h4>
+                        <b-form-checkbox size="lg" v-model="guest">Mark as guest
                         </b-form-checkbox>
                         <b-button size="lg" variant="success" class="mt-auto shadow"
-                                  :disabled="selected_items.length === 0"><h1>Bestätigen</h1></b-button>
-                        <b-button size="lg" variant="secondary" class="mt-3 shadow"><h1>Abbrechen</h1></b-button>
+                                  :disabled="selected_items.length === 0"><h1>Confirm</h1></b-button>
+                        <b-button size="lg" variant="secondary" class="mt-3 shadow"><h1>Cancel</h1></b-button>
                     </b-card-body>
                 </b-card>
             </b-col>
@@ -73,26 +71,23 @@
 </template>
 
 <script>
-    import json from '@/data.json'
-
     export default {
         created() {
-            document.addEventListener("contextmenu", function (e) {
-                e.preventDefault();
-            }, false)
+            this.gif = "'" + require('@/assets/images/gifs/' + this.gifs[Math.floor(Math.random()*(this.gifs.length-1))]) + "'"
         },
         data() {
             return {
-                data: json,
+                data: this.$parent.data,
                 selected_items: [],
                 fields: [
-                    {key: 'product', label: 'Produkt'},
-                    {key: 'price', label: 'Stückpreis', formatter: 'formatPrice'},
-                    {key: 'quantity', label: 'Anzahl', thClass: 'text-center', tdClass: 'text-center'}
+                    {key: 'product'},
+                    {key: 'price', formatter: 'formatPrice'},
+                    {key: 'quantity', thClass: 'text-center', tdClass: 'text-center'}
                 ],
                 gifs: ['crash.gif', 'dog.gif', 'drunk.gif', 'faceplant.gif', 'house.gif',
                     'knight.gif', 'loop.gif', 'mario.gif', 'moonwalk.gif', 'panda.gif', 'race.gif',
                     'run.gif', 'skate.gif', 'snow.gif', 'space.gif', 'titanic.gif', 'truck.gif'],
+                gif: null,
                 guest: false
             }
         },
@@ -142,13 +137,17 @@
     }
 </script>
 
-<style>
+<style scoped>
     .empty-cart {
         height: 100%;
     }
 
     .gif {
-        border-radius: 4px;
+        flex-grow: 1;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 6px;
     }
 
     .quantity-selector {
@@ -158,30 +157,6 @@
     .expand {
         height: calc(100vh - 340px);
         overflow: hidden;
-    }
-
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-    * {
-        cursor: none;
-        scrollbar-width: none;
-        -webkit-user-select: none; /* Chrome all / Safari all */
-        -moz-user-select: none; /* Firefox all */
-        -ms-user-select: none; /* IE 10+ */
-        user-select: none; /* Likely future */
-        touch-action: manipulation;
-    }
-
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type=number] {
-        -moz-appearance: textfield;
     }
 
     .item-bar {

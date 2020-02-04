@@ -4,6 +4,24 @@
     </div>
 </template>
 
+<script>
+    import json from '@/data.json'
+
+    export default {
+        created() {
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+            }, false)
+        },
+        data() {
+            return {
+                data: json
+            }
+        }
+    }
+
+</script>
+
 <style>
     @import "./assets/sass/fonts.scss";
 
@@ -15,16 +33,27 @@
         color: #2c3e50;
     }
 
-    #nav {
-        padding: 30px;
+    ::-webkit-scrollbar {
+        display: none;
     }
 
-    #nav a {
-        font-weight: bold;
-        color: #2c3e50;
+    * {
+        cursor: none;
+        scrollbar-width: none;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Likely future */
+        touch-action: manipulation;
     }
 
-    #nav a.router-link-exact-active {
-        color: #42b983;
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 </style>
