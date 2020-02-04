@@ -15,7 +15,8 @@
         },
         data() {
             return {
-                data: json
+                data: json,
+                selected_user: null
             }
         }
     }

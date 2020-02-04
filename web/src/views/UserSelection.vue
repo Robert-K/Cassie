@@ -5,6 +5,7 @@
                 <b-card no-body class="shadow" style="flex-grow: 1">
                     <b-card-body class="d-flex flex-column">
                         <h1 class="logo gradient-text">Cassie</h1>
+                        <h5 class="text-muted">Hydration Systems</h5>
                         <div class="mb-3">
                             <hr>
                         </div>
@@ -31,7 +32,7 @@
             <b-col>
                 <b-row>
                     <b-col v-for="user in data.users" :key="user.id" cols="4" class="mb-3 pl-3 pr-0 text-muted">
-                        <b-card no-body class="shadow">
+                        <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
                                 <h2>{{user.name}}</h2>
                                 <h3 v-bind:style="{color: user.balance < 0 ? 'red' : 'green'}">
@@ -54,19 +55,9 @@
             }
         },
         methods: {
-            hashCode(str) { // java String#hashCode
-                let hash = 0;
-                for (let i = 0; i < str.length; i++) {
-                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-                }
-                return hash;
-            },
-            intToRGB(i) {
-                let c = (i & 0x00FFFFFF)
-                    .toString(16)
-                    .toUpperCase();
-
-                return "00000".substring(0, 6 - c.length) + c;
+            selectUser(user) {
+                this.$parent.selected_user = user
+                this.$router.push('item-selection')
             },
             formatQuantity(value) {
                 return Math.max(value, 1).toString()
@@ -90,6 +81,7 @@
 
     .logo {
         font-size: 62px;
+        margin-bottom: -6px;
     }
 
     .gradient-text {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserSelection from '../views/UserSelection.vue'
+import ItemSelection from "../views/ItemSelection";
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes = [
   {
     path: '/item-selection',
     name: 'item-selection',
-    component: () => import('../views/ItemSelection.vue')
+    component: ItemSelection
   }
 ]
 

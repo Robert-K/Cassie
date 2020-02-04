@@ -49,7 +49,7 @@
                     <div v-else class="d-flex flex-column empty-cart">
                         <h5>Your shopping cart is empty.</h5>
                         <p>Select products by picking them above or scanning their barcodes.</p>
-                        <div class="gif shadow" v-bind:style="{ 'background-image': 'url(' + gif + ')' }" />
+                        <div class="gif shadow" v-bind:style="{ 'background-image': 'url(' + gif + ')' }"/>
                     </div>
                 </b-card>
             </b-col>
@@ -57,12 +57,17 @@
                 <b-card no-body class="shadow expand">
                     <b-card-body class="d-flex flex-column">
                         <h1>Total: {{formatPrice(getTotal())}}</h1>
-                        <h4 class="text-muted my-auto">Mahamomandalanta<br>Balance: -4,00€</h4>
-                        <b-form-checkbox size="lg" v-model="guest">Mark as guest
-                        </b-form-checkbox>
-                        <b-button size="lg" variant="success" class="mt-auto shadow"
-                                  :disabled="selected_items.length === 0"><h1>Confirm</h1></b-button>
-                        <b-button size="lg" variant="secondary" class="mt-3 shadow"><h1>Cancel</h1></b-button>
+                        <template v-if="$parent.selected_user != null">
+                            <h4 class="text-muted my-auto">{{$parent.selected_user.name}}<br>
+                                Balance: {{formatPrice($parent.selected_user.balance)}}</h4>
+                            <b-form-checkbox size="lg" v-model="guest">Mark as guest purchase
+                            </b-form-checkbox>
+                            <b-button size="lg" variant="success" class="mt-auto shadow"
+                                      :disabled="selected_items.length === 0"><h1>Confirm</h1></b-button>
+                        </template>
+                        <h4 v-else class="text-muted my-auto">No user selected!</h4>
+                        <b-button size="lg" variant="secondary" class="mt-3 shadow" @click="$router.push('/')"><h1>
+                            Cancel</h1></b-button>
                     </b-card-body>
                 </b-card>
             </b-col>
@@ -73,7 +78,7 @@
 <script>
     export default {
         created() {
-            this.gif = "'" + require('@/assets/images/gifs/' + this.gifs[Math.floor(Math.random()*(this.gifs.length-1))]) + "'"
+            this.gif = "'" + require('@/assets/images/gifs/' + this.gifs[Math.floor(Math.random() * (this.gifs.length - 1))]) + "'"
         },
         data() {
             return {
@@ -85,8 +90,10 @@
                     {key: 'quantity', thClass: 'text-center', tdClass: 'text-center'}
                 ],
                 gifs: ['crash.gif', 'dog.gif', 'drunk.gif', 'faceplant.gif', 'house.gif',
-                    'knight.gif', 'loop.gif', 'mario.gif', 'moonwalk.gif', 'panda.gif', 'race.gif',
-                    'run.gif', 'skate.gif', 'snow.gif', 'space.gif', 'titanic.gif', 'truck.gif'],
+                    'knight.gif', 'loop.gif', 'mario.gif', 'moonwalk.gif', 'panda.gif',
+                    'race.gif', 'run.gif', 'skate.gif', 'snow.gif', 'space.gif', 'titanic.gif',
+                    'truck.gif', 'mud.gif', 'turn.gif', 'cat.gif', 'backwards.gif', 'milk.gif',
+                    'flip.gif', 'car.gif', 'boy.gif', 'parking.gif', 'legs.gif'],
                 gif: null,
                 guest: false
             }
