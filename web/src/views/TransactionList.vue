@@ -2,8 +2,17 @@
     <div id="transaction-list">
         <b-card no-body class="shadow mx-3 my-4">
             <b-card-body class="p-0">
+                <div class="p-3 text-left">
+                    <b-button pill @click="$router.push('/')" class="shadow" variant="outline-secondary">
+                        Back
+                    </b-button>
+                </div>
                 <b-table no-border-collapse sticky-header="91vh" striped sort-by="date" sort-desc class="text-left"
                          :items="data.transactions" :fields="fields">
+                    <template v-slot:cell(guest)="data">
+                        <font-awesome-icon v-if="data.value === true" :icon="['fas','check']"/>
+                        <font-awesome-icon v-else :icon="['fas','times']"/>
+                    </template>
                     <template v-slot:cell(items)="data">
                         <div v-for="item in data.value" :key="item.barcode">{{item.quantity}}x {{item.name}}
                             {{item.variant}}

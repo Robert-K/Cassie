@@ -29,19 +29,19 @@
                         <template v-slot:cell(quantity)="data">
                             <b-input-group class="shadow quantity-selector">
                                 <b-input-group-prepend>
-                                    <b-btn variant="outline-danger"
+                                    <b-button variant="outline-secondary"
                                            @click="removeItem(data.item)">
                                         <font-awesome-icon :icon="['fas','minus']"/>
-                                    </b-btn>
+                                    </b-button>
                                 </b-input-group-prepend>
                                 <b-form-input type="number" v-model="data.item.quantity" class="text-center"
                                               :formatter="formatQuantity"
                                               style="width: 10px;" size="lg"/>
                                 <b-input-group-append>
-                                    <b-btn variant="outline-success"
+                                    <b-button variant="outline-secondary"
                                            @click="addItem(data.item)">
                                         <font-awesome-icon :icon="['fas','plus']"/>
-                                    </b-btn>
+                                    </b-button>
                                 </b-input-group-append>
                             </b-input-group>
                         </template>

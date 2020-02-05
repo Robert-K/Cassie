@@ -9,20 +9,20 @@
                         <div class="mb-3">
                             <hr>
                         </div>
-                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3"
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
                                   @click="$router.push('/transaction-list')">
                             Transactions
                         </b-button>
 
-                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3">
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
                             Make payment
                         </b-button>
 
-                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3">
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
                             Statistics
                         </b-button>
 
-                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3">
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
                             Hidden feature
                         </b-button>
 

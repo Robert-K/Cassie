@@ -18,7 +18,7 @@
         {
             "name": "Linus",
             "id": 3,
-            "balance": -55
+            "balance": -110
         },
         {
             "name": "Mohammad",
@@ -812,6 +812,27 @@
             ],
             "amount": 275,
             "date": "05.02.2020, 03:14:52"
+        },
+        {
+            "user": {
+                "balance": -55,
+                "id": 3,
+                "name": "Linus"
+            },
+            "guest": true,
+            "items": [
+                {
+                    "barcode": "4004154069339",
+                    "image": "bht_pfirsich.png",
+                    "name": "Burkhardt Eistee",
+                    "price": 55,
+                    "variant": "Pfirsich",
+                    "volume": 0.33,
+                    "quantity": 1
+                }
+            ],
+            "amount": 55,
+            "date": "05.02.2020, 12:15:28"
         }
     ],
     "payments": []

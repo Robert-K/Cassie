@@ -7,10 +7,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {BootstrapVue} from "bootstrap-vue"
 
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faPlus, faMinus, faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-
-library.add(faPlus, faMinus, faChevronLeft)
+import {faPlus, faMinus, faChevronLeft, faTimes, faCheck} from '@fortawesome/free-solid-svg-icons'
+library.add(faPlus, faMinus, faChevronLeft, faTimes, faCheck)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
