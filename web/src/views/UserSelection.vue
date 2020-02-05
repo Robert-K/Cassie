@@ -36,7 +36,7 @@
                         <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
                                 <h2>{{user.name}}</h2>
-                                <h3 v-bind:style="{color: balanceColor(user.balance)}">
+                                <h3 :style="{color: balanceColor(user.balance)}">
                                     {{formatPrice(user.balance)}}</h3>
                             </b-card-body>
                         </b-card>

@@ -3,7 +3,7 @@
         {
             "name": "Robert",
             "id": 0,
-            "balance": -1065
+            "balance": -1730
         },
         {
             "name": "Anton",
@@ -698,6 +698,120 @@
             ],
             "amount": 7000,
             "date": "05.02.2020, 02:55:30"
+        },
+        {
+            "user": {
+                "balance": -1065,
+                "id": 0,
+                "name": "Robert"
+            },
+            "guest": false,
+            "items": [
+                {
+                    "barcode": "4260107220015",
+                    "image": "fritz_kola.png",
+                    "name": "fritz-kola",
+                    "price": 70,
+                    "variant": null,
+                    "volume": 0.33,
+                    "quantity": 1
+                }
+            ],
+            "amount": 70,
+            "date": "05.02.2020, 03:14:43"
+        },
+        {
+            "user": {
+                "balance": -1065,
+                "id": 0,
+                "name": "Robert"
+            },
+            "guest": false,
+            "items": [
+                {
+                    "barcode": "4260107220015",
+                    "image": "fritz_kola.png",
+                    "name": "fritz-kola",
+                    "price": 70,
+                    "variant": null,
+                    "volume": 0.33,
+                    "quantity": 1
+                }
+            ],
+            "amount": 70,
+            "date": "05.02.2020, 03:14:45"
+        },
+        {
+            "user": {
+                "balance": -1135,
+                "id": 0,
+                "name": "Robert"
+            },
+            "guest": false,
+            "items": [
+                {
+                    "barcode": "4260107220015",
+                    "image": "fritz_kola.png",
+                    "name": "fritz-kola",
+                    "price": 70,
+                    "variant": null,
+                    "volume": 0.33,
+                    "quantity": 2
+                }
+            ],
+            "amount": 140,
+            "date": "05.02.2020, 03:14:47"
+        },
+        {
+            "user": {
+                "balance": -1205,
+                "id": 0,
+                "name": "Robert"
+            },
+            "guest": false,
+            "items": [
+                {
+                    "barcode": "4004154069339",
+                    "image": "bht_pfirsich.png",
+                    "name": "Burkhardt Eistee",
+                    "price": 55,
+                    "variant": "Pfirsich",
+                    "volume": 0.33,
+                    "quantity": 1
+                },
+                {
+                    "barcode": "4004154033330",
+                    "image": "bht_granatapfel.png",
+                    "name": "Burkhardt Eistee",
+                    "price": 55,
+                    "variant": "Granatapfel",
+                    "volume": 0.33,
+                    "quantity": 1
+                }
+            ],
+            "amount": 110,
+            "date": "05.02.2020, 03:14:49"
+        },
+        {
+            "user": {
+                "balance": -1345,
+                "id": 0,
+                "name": "Robert"
+            },
+            "guest": false,
+            "items": [
+                {
+                    "barcode": "4003904031909",
+                    "image": "blz_grapefruit.png",
+                    "name": "Bad Liebenzeller",
+                    "price": 55,
+                    "variant": "Grapefruit light",
+                    "volume": 0.7,
+                    "quantity": 5
+                }
+            ],
+            "amount": 275,
+            "date": "05.02.2020, 03:14:52"
         }
     ],
     "payments": []
