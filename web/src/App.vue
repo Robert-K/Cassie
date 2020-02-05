@@ -1,6 +1,9 @@
 <template>
     <div id="app">
         <router-view v-if="data != null"/>
+        <div v-else class="spinner-container d-flex flex-column">
+            <b-spinner class="m-auto" style="width: 8rem; height: 8rem;" variant="primary"/>
+        </div>
     </div>
 </template>
 
@@ -14,6 +17,7 @@
         },
         data() {
             return {
+                host: 'http://100.124.99.212:5000',
                 data: null,
                 selected_user: null
             }
@@ -21,15 +25,13 @@
         methods: {
             preventContextMenu() {
                 document.addEventListener("contextmenu", function (e) {
-                    e.preventDefault();
+                    e.preventDefault()
                 }, false)
             },
             getData() {
-                const path = 'http://100.124.99.212:5000/data'
-                axios.get(path).then((res) => {
+                axios.get(this.host).then((res) => {
                     this.data = res.data
-                })
-                .catch((error) => {
+                }).catch((error) => {
                     console.error(error)
                 })
             }
@@ -71,5 +73,9 @@
 
     input[type=number] {
         -moz-appearance: textfield;
+    }
+
+    .spinner-container {
+        height: 100vh;
     }
 </style>

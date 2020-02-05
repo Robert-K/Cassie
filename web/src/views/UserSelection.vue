@@ -1,7 +1,7 @@
 <template>
     <div id="user-selection">
         <b-row class="py-4 px-3 full-height m-0">
-            <b-col cols="3" class="d-flex flex-column pr-0">
+            <b-col cols="3" class="d-flex flex-column px-0">
                 <b-card no-body class="shadow" style="flex-grow: 1">
                     <b-card-body class="d-flex flex-column">
                         <h1 class="logo gradient-text">Cassie</h1>
@@ -9,7 +9,8 @@
                         <div class="mb-3">
                             <hr>
                         </div>
-                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3">
+                        <b-button size="lg" block variant="outline-secondary" class="shadow mb-3"
+                                  @click="$router.push('/transaction-list')">
                             Transactions
                         </b-button>
 
@@ -35,7 +36,7 @@
                         <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
                                 <h2>{{user.name}}</h2>
-                                <h3 v-bind:style="{color: user.balance < 0 ? 'red' : 'green'}">
+                                <h3 v-bind:style="{color: balanceColor(user.balance)}">
                                     {{formatPrice(user.balance)}}</h3>
                             </b-card-body>
                         </b-card>
@@ -47,6 +48,8 @@
 </template>
 
 <script>
+    const interpolate = require('color-interpolate')
+
     export default {
         name: 'user-selection',
         data() {
@@ -59,14 +62,12 @@
                 this.$parent.selected_user = user
                 this.$router.push('item-selection')
             },
-            formatQuantity(value) {
-                return Math.max(value, 1).toString()
-            },
             formatPrice(value) {
                 return (value / 100).toFixed(2) + '€'
             },
-            formatVolume(value) {
-                return value + 'l'
+            balanceColor(balance) {
+                let map = interpolate(['green', 'orange', 'red'])
+                return map(Math.max((-balance / 100) / 120, 0))
             }
         }
     }

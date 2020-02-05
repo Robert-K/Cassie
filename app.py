@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import json, atexit
+import json, atexit, time
 
 DATA_PATH = 'data.json'
 DEBUG = False
@@ -11,10 +11,13 @@ app.config.from_object(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 
-@app.route('/<path:path>', methods=['GET', 'POST'])
-def catch_all(path):
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def get_data(path):
+    if path == '':
+        return jsonify(data)
     segments = path.split('/')
-    result = {'data': data}
+    result = data
     for segment in segments:
         if segment in result:
             result = result[segment]
@@ -22,9 +25,17 @@ def catch_all(path):
             result = result[int(segment)]
         else:
             return 'Invalid path!'
-    if request.method == 'POST':
-        print(request.get_json())
     return jsonify(result)
+
+
+@app.route('/transactions/add', methods=['POST'])
+def post_transations_add():
+    transaction = request.json
+    transaction['date'] = time.strftime("%d.%m.%Y, %H:%M:%S")
+    data['transactions'].append(transaction)
+    data['users'][transaction['user']['id']]['balance'] -= transaction['amount']
+    save_data(data)
+    return 'Transaction received!'
 
 
 def load_data():
@@ -39,8 +50,6 @@ def save_data(data_to_save):
 
 if __name__ == '__main__':
     data = load_data()
-
-    data["users"][0]["balance"] = 100
 
     atexit.register(save_data, data)
 

@@ -23,7 +23,7 @@
             <b-col cols="7">
                 <b-card class="shadow text-left expand">
                     <b-table :items="selected_items" :fields="fields" v-if="selected_items.length > 0">
-                        <template v-slot:cell(product)="data">
+                        <template v-slot:cell(item)="data">
                             {{data.item.name}} <b>{{data.item.variant}}</b> {{formatVolume(data.item.volume)}}
                         </template>
                         <template v-slot:cell(quantity)="data">
@@ -56,14 +56,14 @@
             <b-col class="pl-0">
                 <b-card no-body class="shadow expand">
                     <b-card-body class="d-flex flex-column">
-                        <h1>Total: {{formatPrice(getTotal())}}</h1>
+                        <h1>Total: {{formatPrice(total())}}</h1>
                         <template v-if="$parent.selected_user != null">
                             <h4 class="text-muted my-auto">{{$parent.selected_user.name}}<br>
                                 Balance: {{formatPrice($parent.selected_user.balance)}}</h4>
                             <b-form-checkbox size="lg" v-model="guest">Mark as guest purchase
                             </b-form-checkbox>
                             <b-button size="lg" variant="success" class="mt-auto shadow"
-                                      :disabled="selected_items.length === 0"><h1>Confirm</h1></b-button>
+                                      :disabled="selected_items.length === 0" @click="buy"><h1>Confirm</h1></b-button>
                         </template>
                         <h4 v-else class="text-muted my-auto">No user selected!</h4>
                         <b-button size="lg" variant="secondary" class="mt-3 shadow" @click="$router.push('/')"><h1>
@@ -76,6 +76,8 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         created() {
             this.gif = "'" + require('@/assets/images/gifs/' + this.gifs[Math.floor(Math.random() * (this.gifs.length - 1))]) + "'"
@@ -85,7 +87,7 @@
                 data: this.$parent.data,
                 selected_items: [],
                 fields: [
-                    {key: 'product'},
+                    {key: 'item'},
                     {key: 'price', formatter: 'formatPrice'},
                     {key: 'quantity', thClass: 'text-center', tdClass: 'text-center'}
                 ],
@@ -133,12 +135,28 @@
             formatVolume(value) {
                 return value + 'l'
             },
-            getTotal() {
+            total() {
                 let total = 0
                 this.selected_items.forEach(item => {
                     total += Number(item.price) * Number(item.quantity)
                 })
                 return total
+            },
+            buy() {
+                let transaction = {
+                    'user': this.$parent.selected_user,
+                    'guest': this.guest,
+                    'items': this.selected_items,
+                    'amount': this.total()
+                }
+                axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
+                    this.$parent.getData()
+                    this.$router.push('/')
+                }).catch((error) => {
+                    console.log(error)
+                    this.$parent.getData()
+                    this.$router.push('/')
+                })
             }
         }
     }
