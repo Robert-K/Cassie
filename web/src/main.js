@@ -8,8 +8,8 @@ import {BootstrapVue} from "bootstrap-vue"
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-import {faPlus, faMinus, faChevronLeft, faTimes, faCheck} from '@fortawesome/free-solid-svg-icons'
-library.add(faPlus, faMinus, faChevronLeft, faTimes, faCheck)
+import {faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser} from '@fortawesome/free-solid-svg-icons'
+library.add(faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

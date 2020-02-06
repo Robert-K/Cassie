@@ -1,6 +1,6 @@
 <template>
     <div id="user-selection">
-        <b-row class="py-4 px-3 full-height m-0">
+        <b-row class="py-4 px-3 full-height m-0" v-if="users != null">
             <b-col cols="3" class="d-flex flex-column px-0">
                 <b-card no-body class="shadow" style="flex-grow: 1">
                     <b-card-body class="d-flex flex-column">
@@ -18,21 +18,13 @@
                             Make payment
                         </b-button>
 
-                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
-                            Statistics
-                        </b-button>
-
-                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
-                            Hidden feature
-                        </b-button>
-
                         <p class="text-muted mt-auto mb-0">Made with ❤ <br> by Robert i312</p>
                     </b-card-body>
                 </b-card>
             </b-col>
             <b-col>
                 <b-row>
-                    <b-col v-for="user in data.users" :key="user.id" cols="4" class="mb-3 pl-3 pr-0 text-muted">
+                    <b-col v-for="user in users.users" :key="user.id" cols="4" class="mb-3 pl-3 pr-0 text-muted">
                         <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
                                 <h2>{{user.name}}</h2>
@@ -48,13 +40,18 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     const interpolate = require('color-interpolate')
 
     export default {
         name: 'user-selection',
+        created() {
+            this.getUsers()
+        },
         data() {
             return {
-                data: this.$parent.data
+                users: null
             }
         },
         methods: {
@@ -67,8 +64,15 @@
             },
             balanceColor(balance) {
                 let map = interpolate(['green', 'orange', 'red'])
-                return map(Math.max((-balance / 100) / 120, 0))
-            }
+                return map(Math.max((-balance / 100) / 100, 0))
+            },
+            getUsers() {
+                axios.get(this.$parent.host + '/users').then((res) => {
+                    this.users = res.data
+                }).catch((error) => {
+                    console.error(error)
+                })
+            },
         }
     }
 </script>

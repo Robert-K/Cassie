@@ -1,9 +1,6 @@
 <template>
     <div id="app">
-        <router-view v-if="data != null"/>
-        <div v-else class="spinner-container d-flex flex-column">
-            <b-spinner class="m-auto" style="width: 8rem; height: 8rem;" variant="primary"/>
-        </div>
+        <router-view/>
     </div>
 </template>
 
@@ -13,12 +10,10 @@
     export default {
         created() {
             this.preventContextMenu()
-            this.getData()
         },
         data() {
             return {
-                host: 'http://100.124.99.212:5000',
-                data: null,
+                host: 'http://localhost:5000',
                 selected_user: null
             }
         },
@@ -28,9 +23,23 @@
                     e.preventDefault()
                 }, false)
             },
-            getData() {
-                axios.get(this.host).then((res) => {
-                    this.data = res.data
+            getUsers() {
+                axios.get(this.host + '/users').then((res) => {
+                    this.users = res.data
+                }).catch((error) => {
+                    console.error(error)
+                })
+            },
+            getItems() {
+                axios.get(this.host + '/items').then((res) => {
+                    this.items = res.data
+                }).catch((error) => {
+                    console.error(error)
+                })
+            },
+            getTransactions() {
+                axios.get(this.host + '/transactions').then((res) => {
+                    this.transactions = res.data
                 }).catch((error) => {
                     console.error(error)
                 })
@@ -73,9 +82,5 @@
 
     input[type=number] {
         -moz-appearance: textfield;
-    }
-
-    .spinner-container {
-        height: 100vh;
     }
 </style>

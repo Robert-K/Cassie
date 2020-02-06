@@ -1,77 +1,80 @@
 <template>
     <div id="item-selection">
-        <b-row class="item-bar flex-nowrap m-0 px-2">
-            <b-card no-body v-for="item in data.items" :key="item.barcode" class="item-container mx-2 my-4 shadow"
-                    @click="addItem(item)">
-                <b-card-body>
-                    <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
-                    <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image middle"/>
-                    <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
-                    <b-img :src="require('@/assets/images/bottle_shadow.png')" class="bottle-shadow"/>
-                    <b-card-text class="text-left">
-                        <div class="item-values">
-                            <h3><b>{{formatPrice(item.price)}}</b></h3>
-                            <h6 class="item-volume text-muted">{{formatVolume(item.volume)}}</h6>
-                        </div>
-                        <h6>{{item.name}}</h6>
-                        <h5><b>{{item.variant}}</b></h5>
-                    </b-card-text>
-                </b-card-body>
-            </b-card>
-        </b-row>
-        <b-row class="m-0 flex-nowrap">
-            <b-col cols="7">
-                <b-card class="shadow text-left expand">
-                    <b-table :items="selected_items" :fields="fields" v-if="selected_items.length > 0">
-                        <template v-slot:cell(item)="data">
-                            {{data.item.name}} <b>{{data.item.variant}}</b> {{formatVolume(data.item.volume)}}
-                        </template>
-                        <template v-slot:cell(quantity)="data">
-                            <b-input-group class="shadow quantity-selector">
-                                <b-input-group-prepend>
-                                    <b-button variant="outline-secondary"
-                                           @click="removeItem(data.item)">
-                                        <font-awesome-icon :icon="['fas','minus']"/>
-                                    </b-button>
-                                </b-input-group-prepend>
-                                <b-form-input type="number" v-model="data.item.quantity" class="text-center"
-                                              :formatter="formatQuantity"
-                                              style="width: 10px;" size="lg"/>
-                                <b-input-group-append>
-                                    <b-button variant="outline-secondary"
-                                           @click="addItem(data.item)">
-                                        <font-awesome-icon :icon="['fas','plus']"/>
-                                    </b-button>
-                                </b-input-group-append>
-                            </b-input-group>
-                        </template>
-                    </b-table>
-                    <div v-else class="d-flex flex-column empty-cart">
-                        <h5>Your shopping cart is empty.</h5>
-                        <p>Select products by picking them above or scanning their barcodes.</p>
-                        <div class="gif shadow" v-bind:style="{ 'background-image': 'url(' + gif + ')' }"/>
-                    </div>
-                </b-card>
-            </b-col>
-            <b-col class="pl-0">
-                <b-card no-body class="shadow expand">
-                    <b-card-body class="d-flex flex-column">
-                        <h1>Total: {{formatPrice(total())}}</h1>
-                        <template v-if="$parent.selected_user != null">
-                            <h4 class="text-muted my-auto">{{$parent.selected_user.name}}<br>
-                                Balance: {{formatPrice($parent.selected_user.balance)}}</h4>
-                            <b-form-checkbox size="lg" v-model="guest">Mark as guest purchase
-                            </b-form-checkbox>
-                            <b-button size="lg" variant="success" class="mt-auto shadow"
-                                      :disabled="selected_items.length === 0" @click="buy"><h1>Confirm</h1></b-button>
-                        </template>
-                        <h4 v-else class="text-muted my-auto">No user selected!</h4>
-                        <b-button size="lg" variant="secondary" class="mt-3 shadow" @click="$router.push('/')"><h1>
-                            Cancel</h1></b-button>
+        <div v-if="items != null">
+            <b-row class="item-bar flex-nowrap m-0 px-2">
+                <b-card no-body v-for="item in items" :key="item.barcode" class="item-container mx-2 my-4 shadow"
+                        @click="addItem(item)">
+                    <b-card-body>
+                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
+                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image middle"/>
+                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
+                        <b-img :src="require('@/assets/images/bottle_shadow.png')" class="bottle-shadow"/>
+                        <b-card-text class="text-left">
+                            <div class="item-values">
+                                <h3><b>{{formatPrice(item.price)}}</b></h3>
+                                <h6 class="item-volume text-muted">{{formatVolume(item.volume)}}</h6>
+                            </div>
+                            <h6>{{item.name}}</h6>
+                            <h5><b>{{item.variant}}</b></h5>
+                        </b-card-text>
                     </b-card-body>
                 </b-card>
-            </b-col>
-        </b-row>
+            </b-row>
+            <b-row class="m-0 flex-nowrap">
+                <b-col cols="7">
+                    <b-card class="shadow text-left expand">
+                        <b-table :items="selected_items" :fields="fields" v-if="selected_items.length > 0">
+                            <template v-slot:cell(item)="data">
+                                {{data.item.name}} <b>{{data.item.variant}}</b> {{formatVolume(data.item.volume)}}
+                            </template>
+                            <template v-slot:cell(quantity)="data">
+                                <b-input-group class="shadow quantity-selector">
+                                    <b-input-group-prepend>
+                                        <b-button variant="outline-secondary"
+                                                  @click="removeItem(data.item)">
+                                            <font-awesome-icon :icon="['fas','minus']"/>
+                                        </b-button>
+                                    </b-input-group-prepend>
+                                    <b-form-input type="number" v-model="data.item.quantity" class="text-center"
+                                                  :formatter="formatQuantity"
+                                                  style="width: 10px;" size="lg"/>
+                                    <b-input-group-append>
+                                        <b-button variant="outline-secondary"
+                                                  @click="addItem(data.item)">
+                                            <font-awesome-icon :icon="['fas','plus']"/>
+                                        </b-button>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </template>
+                        </b-table>
+                        <div v-else class="d-flex flex-column empty-cart">
+                            <h5>Your shopping cart is empty.</h5>
+                            <p>Select products by picking them above or scanning their barcodes.</p>
+                            <div class="gif shadow" v-bind:style="{ 'background-image': 'url(' + gif + ')' }"/>
+                        </div>
+                    </b-card>
+                </b-col>
+                <b-col class="pl-0">
+                    <b-card no-body class="shadow expand">
+                        <b-card-body class="d-flex flex-column">
+                            <h1>Total: {{formatPrice(total())}}</h1>
+                            <template v-if="$parent.selected_user != null">
+                                <h4 class="text-muted my-auto">{{$parent.selected_user.name}}<br>
+                                    Balance: {{formatPrice($parent.selected_user.balance)}}</h4>
+                                <b-form-checkbox size="lg" v-model="guest">Mark as guest purchase
+                                </b-form-checkbox>
+                                <b-button size="lg" variant="success" class="mt-auto shadow"
+                                          :disabled="selected_items.length === 0" @click="buy"><h1>Confirm</h1>
+                                </b-button>
+                            </template>
+                            <h4 v-else class="text-muted my-auto">No user selected!</h4>
+                            <b-button size="lg" variant="secondary" class="mt-3 shadow" @click="$router.push('/')"><h1>
+                                Cancel</h1></b-button>
+                        </b-card-body>
+                    </b-card>
+                </b-col>
+            </b-row>
+        </div>
     </div>
 </template>
 
@@ -80,11 +83,13 @@
 
     export default {
         created() {
+            this.getItems()
             this.gif = "'" + require('@/assets/images/gifs/' + this.gifs[Math.floor(Math.random() * (this.gifs.length - 1))]) + "'"
         },
         data() {
             return {
-                data: this.$parent.data,
+                users: null,
+                items: null,
                 selected_items: [],
                 fields: [
                     {key: 'item'},
@@ -145,17 +150,24 @@
             buy() {
                 let transaction = {
                     'user': this.$parent.selected_user,
-                    'guest': this.guest,
                     'items': this.selected_items,
-                    'amount': this.total()
+                    'impact': -this.total()
+                }
+                if (this.guest) {
+                    transaction.guest = true
                 }
                 axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
-                    this.$parent.getData()
                     this.$router.push('/')
                 }).catch((error) => {
                     console.log(error)
-                    this.$parent.getData()
                     this.$router.push('/')
+                })
+            },
+            getItems() {
+                axios.get(this.$parent.host + '/items').then((res) => {
+                    this.items = res.data
+                }).catch((error) => {
+                    console.error(error)
                 })
             }
         }

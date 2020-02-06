@@ -1,0 +1,96 @@
+{
+    "users": [
+        {
+            "name": "Robert",
+            "id": 0,
+            "balance": 0
+        },
+        {
+            "name": "Anton",
+            "id": 1,
+            "balance": 0
+        },
+        {
+            "name": "Nicolas",
+            "id": 2,
+            "balance": 0
+        },
+        {
+            "name": "Linus",
+            "id": 3,
+            "balance": 0
+        },
+        {
+            "name": "Mohammad",
+            "id": 4,
+            "balance": 0
+        },
+        {
+            "name": "Philipp",
+            "id": 5,
+            "balance": 0
+        },
+        {
+            "name": "Fabian",
+            "id": 6,
+            "balance": 0
+        },
+        {
+            "name": "Arnaud",
+            "id": 7,
+            "balance": 0
+        },
+        {
+            "name": "Sarah",
+            "id": 8,
+            "balance": 0
+        },
+        {
+            "name": "Egle",
+            "id": 9,
+            "balance": 0
+        },
+        {
+            "name": "Marcel",
+            "id": 10,
+            "balance": 0
+        },
+        {
+            "name": "Farokh",
+            "id": 11,
+            "balance": 0
+        },
+        {
+            "name": "James",
+            "id": 12,
+            "balance": 0
+        },
+        {
+            "name": "Hector",
+            "id": 13,
+            "balance": 0
+        },
+        {
+            "name": "Laura",
+            "id": 14,
+            "balance": 0
+        }
+    ],
+    "active_users": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+    ]
+}
