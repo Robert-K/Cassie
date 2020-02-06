@@ -105,6 +105,11 @@
                 guest: false
             }
         },
+        sockets: {
+            codeScanned: function (barcode) {
+                console.log('Barcode scanned: ' + barcode)
+            }
+        },
         methods: {
             addItem(item_to_add) {
                 let matching_item = this.selected_items.filter(item => {

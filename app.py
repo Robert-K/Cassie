@@ -1,5 +1,10 @@
+from gevent import monkey
+
+monkey.patch_all()
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_socketio import SocketIO
 import json, atexit, time
 
 USERS_PATH = 'data/users.json'
@@ -10,7 +15,13 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-CORS(app, resources={r'/*': {'origins': '*'}})
+sio = SocketIO(app, cors_allowed_origins='*')
+
+CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
+
+
+def send_code(barcode):
+    sio.emit('codeScanned', barcode)
 
 
 @app.route('/<path:path>')
@@ -38,7 +49,7 @@ def get_data(path):
 @app.route('/transactions/add', methods=['POST'])
 def post_transactions_add():
     transaction = request.json
-    transaction['date'] = time.strftime("%d.%m.%Y, %H:%M:%S")
+    transaction['date'] = time.strftime('%d.%m.%Y, %H:%M:%S')
 
     user_index = None
     for index, user in enumerate(users['users']):
@@ -113,7 +124,7 @@ def run():
 
     atexit.register(save_data)
 
-    app.run(host='0.0.0.0')
+    sio.run(app)
 
 
 if __name__ == '__main__':

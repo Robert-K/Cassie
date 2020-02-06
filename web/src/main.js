@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {BootstrapVue} from "bootstrap-vue"
 
+import VueSocketIO from 'vue-socket.io'
+
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser} from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +18,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
+
+Vue.use(new VueSocketIO({
+    debug: false,
+    connection: 'http://localhost:5000'
+}))
 
 new Vue({
     router,
