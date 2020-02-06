@@ -106,11 +106,21 @@
             }
         },
         sockets: {
-            codeScanned: function (barcode) {
+            connect() {
+                console.log('socket connected')
+            },
+            codeScanned(barcode) {
+                console.log('Received barcode: ' + barcode)
+                if (this.items == null) {
+                    return
+                }
                 let matching_item = this.items.filter(item => {
-                    return item.barcode === barcode.toString()
+                    return item.barcode === barcode
                 })[0]
-                console.log(matching_item)
+                if (matching_item === undefined) {
+                    console.log('Invalid!')
+                    return
+                }
                 this.addItem(matching_item)
             }
         },
