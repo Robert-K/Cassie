@@ -11,7 +11,7 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-CORS(app, resources={r'/*': {'origins': '*'}})
+# CORS(app, resources={r'/*': {'origins': '*'}})
 
 sio = SocketIO(app, cors_allowed_origins='*')
 
@@ -120,8 +120,8 @@ def run():
 
     atexit.register(save_data)
 
-    # app.run(host='0.0.0.0')
-    sio.run(app, host='0.0.0.0')
+    app.run(host='0.0.0.0')
+    # sio.run(app, host='0.0.0.0')
 
 
 if __name__ == '__main__':
