@@ -20,8 +20,8 @@ Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
 
-const socket = io('http://localhost:80');
-Vue.use(VueSocketIOExt, socket);
+const socket = io('http://localhost:5000')
+Vue.use(VueSocketIOExt, socket)
 
 new Vue({
     router,
