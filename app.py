@@ -1,7 +1,3 @@
-from gevent import monkey
-
-monkey.patch_all()
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_socketio import SocketIO
@@ -15,9 +11,9 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-sio = SocketIO(app, cors_allowed_origins='*')
-
 CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
+
+sio = SocketIO(app, cors_allowed_origins='http://localhost:8080')
 
 
 def send_code(barcode):

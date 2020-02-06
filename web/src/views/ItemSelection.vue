@@ -107,7 +107,10 @@
         },
         sockets: {
             codeScanned: function (barcode) {
-                console.log('Barcode scanned: ' + barcode)
+                let matching_item = this.items.filter(item => {
+                    return item.barcode === barcode
+                })[0]
+                this.addItem(matching_item)
             }
         },
         methods: {
