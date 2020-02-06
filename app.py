@@ -10,6 +10,7 @@ DEBUG = False
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['SECRET_KEY'] = 'gimmesomesoda'
 
 CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
 
