@@ -1,4 +1,5 @@
 from gevent import monkey
+
 monkey.patch_all()
 
 from flask import Flask, jsonify, request
@@ -14,9 +15,9 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-CORS(app, resources={r'/*': {'origins': '*'}})
-
 sio = SocketIO(app, cors_allowed_origins='*')
+
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 def send_code(barcode):
