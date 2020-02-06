@@ -13,7 +13,7 @@
         },
         data() {
             return {
-                host: 'http://localhost:5000',
+                host: 'http://100.124.99.212:5000',
                 selected_user: null
             }
         },
