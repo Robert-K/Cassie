@@ -1,4 +1,5 @@
 import atexit
+from time import sleep
 
 SCANNER_PATH = '/dev/ttyUSB0'
 
@@ -14,6 +15,7 @@ def run(callback):
     atexit.register(scanner.close)
 
     while True:
+        sleep(0.01)
         line = scanner.readline()
         if line != b'\n':
             callback(line[:-3].decode())
