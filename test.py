@@ -1,13 +1,17 @@
-import app, scan
+import app
 import threading
+from time import sleep
 
-app_thread = threading.Thread(target=app.run, daemon=True)
 
+def test_function():
+    while True:
+        print('Test thread running...')
+        sleep(5)
+
+
+test_thread = threading.Thread(target=test_function, daemon=True)
 
 if __name__ == '__main__':
-    app_thread.start()
-    while True:
-        code = input('Enter barcode or noting to exit: ')
-        if code == '':
-            break
-        app.send_code(code)
+    test_thread.start()
+    print('Test thread started.')
+    app.run()

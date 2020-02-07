@@ -1,9 +1,10 @@
-import app, scan
+import app
+import scan
 import threading
 
-app_thread = threading.Thread(target=app.run, daemon=True)
-
+scan_thread = threading.Thread(target=scan.run, args=(app.send_code,), daemon=True)
 
 if __name__ == '__main__':
-    app_thread.start()
-    scan.run(app.send_code)
+    scan_thread.start()
+    print('Scan thread started.')
+    app.run()
