@@ -5,20 +5,14 @@
 </template>
 
 <script>
-    import Speech from 'speak-tts'
-
     export default {
         created() {
             this.preventContextMenu()
-            this.speech.init({
-                'lang': 'de-DE'
-            })
         },
         data() {
             return {
                 host: 'http://localhost:5000',
-                selected_user: null,
-                speech: new Speech()
+                selected_user: null
             }
         },
         methods: {

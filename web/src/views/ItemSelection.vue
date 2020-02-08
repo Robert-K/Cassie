@@ -122,7 +122,6 @@
         },
         methods: {
             addItem(item_to_add) {
-                this.$parent.speech.speak({text: item_to_add.name + (item_to_add.variant != null ? ' ' + item_to_add.variant : '')})
                 let matching_item = this.selected_items.filter(item => {
                     return item.barcode === item_to_add.barcode
                 })[0]

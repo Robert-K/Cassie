@@ -87,7 +87,6 @@
         },
         methods: {
             selectUser(user) {
-                this.$parent.speech.speak({text: user.name})
                 this.$parent.selected_user = user
                 this.$router.push('item-selection')
             },
