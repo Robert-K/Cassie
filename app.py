@@ -36,6 +36,8 @@ def post_cdp():
             top = data['top']['center']
         elif 'right' in data['top']:
             top = cdp.merge(cdp.left(data['top']['left']), cdp.right(data['top']['right']))
+        elif 'left' in data['top']:
+            top = cdp.left(data['top']['left'])
         else:
             top = data['top']
     if 'bottom' in data:
@@ -43,6 +45,8 @@ def post_cdp():
             bottom = data['bottom']['center']
         elif 'right' in data['bottom']:
             bottom = cdp.merge(cdp.left(data['bottom']['left']), cdp.right(data['bottom']['right']))
+        elif 'left' in data['bottom']:
+            top = cdp.left(data['bottom']['left'])
         else:
             bottom = data['bottom']
     cdp.show(top, bottom)

@@ -133,7 +133,7 @@
                     this.selected_items.push(item_to_add)
                 }
                 this.$parent.CDPmessage({
-                    top: item_to_add.name,
+                    top: {left: item_to_add.name},
                     bottom: {
                         left: item_to_add.variant !== null ? item_to_add.variant : '',
                         right: (item_to_add.price / 100).toFixed(2)

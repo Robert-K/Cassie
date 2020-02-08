@@ -49,6 +49,6 @@ def show(top, bottom):
         top = EMPTY
     if bottom is None:
         bottom = EMPTY
-    top = left(top)[:20]
-    bottom = left(bottom)[:20]
+    top = center(top)[:20]
+    bottom = center(bottom)[:20]
     dev.write(("\f" + top + bottom + "\n"))
