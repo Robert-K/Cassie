@@ -11,7 +11,26 @@
                     <b-modal id="undo-modal" title="You are about to permanently undo this transaction.">
                         <b-img class="shadow" fluid :src="require('@/assets/images/gifs/invisible.gif')"/>
                         <template v-slot:modal-footer>
-                            <b-button block size="lg" variant="danger" @click="undoTransaction(undo_date)"
+                            <div v-if="undo_transaction.payment === true">
+                                <h2 class="text-center text-muted">Admin code</h2>
+                                <div class="text-center">
+                                    <b-button-group size="md" class="mb-3 d-flex flex-row shadow">
+                                        <b-button variant="outline-secondary" v-for="number in 10"
+                                                  :key="'number-'+number"
+                                                  @click="undo_code += number-1">
+                                            <h3>{{number - 1}}</h3>
+                                        </b-button>
+                                        <b-button variant="outline-secondary"
+                                                  @click="undo_code = undo_code.slice(0, -1)">
+                                            <font-awesome-icon :icon="['fas','backspace']"/>
+                                        </b-button>
+                                    </b-button-group>
+                                </div>
+                                <h2 class="text-center text-muted">{{undo_code}}</h2>
+                            </div>
+                            <b-button block size="lg"
+                                      :disabled="undo_code !== '9312' && undo_transaction.payment === true"
+                                      variant="danger" @click="undoTransaction(undo_transaction)"
                                       class="shadow">
                                 Undo transaction
                             </b-button>
@@ -49,7 +68,7 @@
                         <template v-slot:cell(undo)="data">
                             <b-button :id="'button-undo-transaction' + data.index" variant="danger" class="shadow"
                                       v-if="isLessThenHalfAnHourAgo(data.item.date)"
-                                      @click="showUndoModal(data.item.date)">Undo
+                                      @click="showUndoModal(data.item)">Undo
                             </b-button>
                         </template>
                     </b-table>
@@ -85,7 +104,8 @@
                     {key: 'date', sortable: true},
                     {key: 'undo'}
                 ],
-                undo_date: null
+                undo_transaction: null,
+                undo_code: ''
             }
         },
         methods: {
@@ -106,13 +126,14 @@
                     console.error(error)
                 })
             },
-            showUndoModal(date) {
-                this.undo_date = date
+            showUndoModal(transaction) {
+                this.undo_code = ''
+                this.undo_transaction = transaction
                 this.$bvModal.show('undo-modal')
             },
-            undoTransaction(date) {
+            undoTransaction(transaction) {
                 this.$bvModal.hide('undo-modal')
-                axios.post(this.$parent.host + '/transactions/undo', {date: date}).then(() => {
+                axios.post(this.$parent.host + '/transactions/undo', {date: transaction.date}).then(() => {
                     this.$parent.CDPmessage({top: 'Transaction undone!'}, 10)
                     this.getTransactions()
                 }).catch((error) => {

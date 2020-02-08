@@ -34,7 +34,7 @@
                 </div>
                 <h2 class="text-center text-muted">{{payment_code}}</h2>
                 <b-button @click="pay" class="shadow" block size="lg" variant="success"
-                          :disabled="payment_user == null && payment_code !== '9312'"><h1>Confirm payment</h1>
+                          :disabled="payment_user == null || payment_code !== '9312'"><h1>Confirm payment</h1>
                 </b-button>
             </b-modal>
             <b-col cols="3" class="d-flex flex-column px-0">

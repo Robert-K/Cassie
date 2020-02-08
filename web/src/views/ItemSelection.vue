@@ -114,7 +114,7 @@
                     return item.barcode === barcode
                 })[0]
                 if (matching_item === undefined) {
-                    console.log('Invalid!')
+                    console.log('Unregistered barcode scanned: ' + barcode)
                     return
                 }
                 this.addItem(matching_item)
