@@ -6,6 +6,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import json, atexit, time
+import subprocess
 
 USERS_PATH = 'data/users.json'
 ITEMS_PATH = 'data/items.json'
@@ -15,14 +16,18 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-sio = SocketIO(app, cors_allowed_origins='*')
+sio = SocketIO(app, cors_allowed_origins='http://localhost:8080')
 
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
 
 
 def send_code(barcode):
     sio.emit('codeScanned', barcode)
 
+@app.route('/screensaver', methods=['POST'])
+def post_screensaver():
+    subprocess.run(["xscreensaver-command -activate"], shell=True)
+    return 'Screensaver started!'
 
 @app.route('/<path:path>')
 def get_data(path):

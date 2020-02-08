@@ -1,6 +1,42 @@
 <template>
     <div id="user-selection">
         <b-row class="py-4 px-3 full-height m-0" v-if="active_users != null">
+            <b-modal id="payment" hide-header hide-footer>
+                <h2 class="text-center text-muted">User</h2>
+                <b-form-select size="lg" class="shadow mb-3" v-model="payment_user"
+                               :options="paymentUserOptions"></b-form-select>
+                <h2 class="text-center text-muted">Amount in €</h2>
+                <b-input-group class="shadow mb-3">
+                    <b-input-group-prepend>
+                        <b-button variant="outline-secondary" @click="payment_amount = Math.max(payment_amount-1, 1)">
+                            <font-awesome-icon :icon="['fas','minus']"/>
+                        </b-button>
+                    </b-input-group-prepend>
+                    <b-form-input type="number" v-model="payment_amount" class="text-center" id="payment-amount"
+                                  :formatter="formatPayment" lazy-formatter size="lg"/>
+                    <b-input-group-append>
+                        <b-button variant="outline-secondary">
+                            <font-awesome-icon :icon="['fas','plus']" @click="payment_amount++"/>
+                        </b-button>
+                    </b-input-group-append>
+                </b-input-group>
+                <h2 class="text-center text-muted">Admin code</h2>
+                <div class="text-center">
+                    <b-button-group size="md" class="mb-3 d-flex flex-row shadow">
+                        <b-button variant="outline-secondary" v-for="number in 10" :key="'number-'+number"
+                                  @click="payment_code += number-1">
+                            <h3>{{number - 1}}</h3>
+                        </b-button>
+                        <b-button variant="outline-secondary" @click="payment_code = payment_code.slice(0, -1)">
+                            <font-awesome-icon :icon="['fas','backspace']"/>
+                        </b-button>
+                    </b-button-group>
+                </div>
+                <h2 class="text-center text-muted">{{payment_code}}</h2>
+                <b-button @click="pay" class="shadow" block size="lg" variant="success"
+                          :disabled="payment_user == null && payment_code !== '9312'"><h1>Confirm payment</h1>
+                </b-button>
+            </b-modal>
             <b-col cols="3" class="d-flex flex-column px-0">
                 <b-card no-body class="shadow" style="flex-grow: 1">
                     <b-card-body class="d-flex flex-column">
@@ -19,8 +55,14 @@
                             Sort by: {{sorting_keys[key]}}
                         </b-button>
 
-                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3">
-                            Make payment
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
+                                  @click="showPayment">
+                            Add payment
+                        </b-button>
+
+                        <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
+                                  @click="screensaver">
+                            Screensaver
                         </b-button>
 
                         <p class="text-muted mt-auto mb-0">Made with ❤ <br> by Robert i312</p>
@@ -29,7 +71,7 @@
             </b-col>
             <b-col class="d-flex flex-column">
                 <b-row>
-                    <b-col v-for="user in sortedActiveUsers" :key="user.id" cols="4"
+                    <b-col v-for="user in sortedActiveUsers" :key="'active-' + user.id" cols="4"
                            class="mb-3 pl-3 pr-0 text-muted">
                         <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
@@ -43,9 +85,22 @@
                         </b-card>
                     </b-col>
                 </b-row>
+                <b-modal id="more-users" hide-header hide-footer body-class="pb-0">
+                    <b-card v-for="user in inactive_users" :key="'inactive-' + user.id" class="shadow mb-3 text-muted"
+                            @click="selectUser(user)">
+                        <b-row>
+                            <b-col>
+                                <h2>{{user.name}}</h2>
+                            </b-col>
+                            <b-col><h2 :style="{color: balanceColor(user.balance), float: 'right'}">
+                                {{formatPrice(user.balance)}}</h2>
+                            </b-col>
+                        </b-row>
+                    </b-card>
+                </b-modal>
                 <b-row style="flex-grow: 1">
                     <b-col class="pr-0 text-muted" style="height: 100%">
-                        <b-card no-body class="shadow" style="height: 100%">
+                        <b-card no-body class="shadow" style="height: 100%" @click="$bvModal.show('more-users')">
                             <b-card-body class="p-2 d-flex flex-column">
                                 <h2 class="my-auto">More users</h2>
                             </b-card-body>
@@ -72,7 +127,10 @@
                 active_users: [],
                 inactive_users: [],
                 sorting_keys: ['Room', 'Balance'],
-                key: 0
+                key: 0,
+                payment_user: null,
+                payment_amount: 30,
+                payment_code: ''
             }
         },
         computed: {
@@ -84,6 +142,20 @@
                         return a.balance - b.balance
                 })
             },
+            paymentUserOptions() {
+                let active = []
+                this.active_users.forEach((user) => {
+                    active.push({
+                        value: user,
+                        text: user.name + (user.hasOwnProperty('room') ? ' i3' + user.room : '')
+                    })
+                })
+                let inactive = []
+                this.inactive_users.forEach((user) => {
+                    inactive.push({value: user, text: user.name})
+                })
+                return [{label: 'Active users', options: active}, {label: 'Inactive users', options: inactive}]
+            }
         },
         methods: {
             selectUser(user) {
@@ -92,6 +164,9 @@
             },
             formatPrice(value) {
                 return (value / 100).toFixed(2) + '€'
+            },
+            formatPayment(value) {
+                return Math.max(value, 1)
             },
             balanceColor(balance) {
                 let map = interpolate(['green', 'orange', 'red'])
@@ -109,6 +184,31 @@
 
                 }).catch((error) => {
                     console.error(error)
+                })
+            },
+            showPayment() {
+                this.payment_user = null
+                this.payment_amount = 30
+                this.payment_code = ''
+                this.$bvModal.show('payment')
+            },
+            pay() {
+                this.payment_code = ''
+                let transaction = {
+                    'user': this.payment_user,
+                    'payment': true,
+                    'impact': this.payment_amount * 100
+                }
+                axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
+                    this.$bvModal.hide('payment')
+                }).catch((error) => {
+                    console.log(error)
+                    this.$bvModal.hide('payment')
+                })
+            },
+            screensaver() {
+                axios.post(this.$parent.host + '/screensaver').catch((error) => {
+                    console.log(error)
                 })
             }
         }

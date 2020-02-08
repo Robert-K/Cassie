@@ -11,8 +11,8 @@ import io from 'socket.io-client';
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-import {faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser} from '@fortawesome/free-solid-svg-icons'
-library.add(faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser)
+import {faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser, faBackspace} from '@fortawesome/free-solid-svg-icons'
+library.add(faPlus, faMinus, faChevronLeft, faTimes, faCheck, faHandHoldingUsd, faUser, faBackspace)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
