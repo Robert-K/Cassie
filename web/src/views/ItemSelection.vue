@@ -135,7 +135,7 @@
                 this.$parent.CDPmessage({
                     top: item_to_add.name,
                     bottom: {
-                        left: (item_to_add.hasOwnProperty('variant') ? item_to_add.variant : ''),
+                        left: item_to_add.variant !== null ? item_to_add.variant : '',
                         right: this.formatPrice(item_to_add.price)
                     }
                 }, 2)
