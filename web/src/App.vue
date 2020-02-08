@@ -17,17 +17,6 @@
                 selected_user: null
             }
         },
-        sockets: {
-            connect() {
-                console.log('socket connected app')
-            },
-            disconnect() {
-                console.log('socket disconnected app')
-            },
-            codeScanned(barcode) {
-                console.log('Received barcode: ' + barcode + ' app')
-            }
-        },
         methods: {
             preventContextMenu() {
                 document.addEventListener("contextmenu", function (e) {

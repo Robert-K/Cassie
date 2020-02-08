@@ -106,14 +106,7 @@
             }
         },
         sockets: {
-            connect() {
-                console.log('socket connected')
-            },
-            disconnect() {
-                console.log('socket disconnected')
-            },
             codeScanned(barcode) {
-                console.log('Received barcode: ' + barcode)
                 if (this.items == null) {
                     return
                 }
