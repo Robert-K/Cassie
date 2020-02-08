@@ -34,7 +34,7 @@
                     moment.locale('de')
                     this.CDPset({
                         top: {center: moment().format("HH:mm")},
-                        bottom: {center: moment().format("Do MMMM YYYY")}
+                        bottom: {center: moment().format("Do MMM YYYY")}
                     })
                 }
             },
