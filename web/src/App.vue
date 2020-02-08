@@ -46,7 +46,7 @@
                 }, timeout * 1000);
             },
             CDPset(data) {
-                axios.post(this.$parent.host + '/cdp', data).catch((error) => {
+                axios.post(this.host + '/cdp', data).catch((error) => {
                     console.log(error)
                 })
             }
