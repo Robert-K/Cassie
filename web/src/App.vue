@@ -5,8 +5,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
-
     export default {
         created() {
             this.preventContextMenu()
@@ -22,27 +20,6 @@
                 document.addEventListener("contextmenu", function (e) {
                     e.preventDefault()
                 }, false)
-            },
-            getUsers() {
-                axios.get(this.host + '/users').then((res) => {
-                    this.users = res.data
-                }).catch((error) => {
-                    console.error(error)
-                })
-            },
-            getItems() {
-                axios.get(this.host + '/items').then((res) => {
-                    this.items = res.data
-                }).catch((error) => {
-                    console.error(error)
-                })
-            },
-            getTransactions() {
-                axios.get(this.host + '/transactions').then((res) => {
-                    this.transactions = res.data
-                }).catch((error) => {
-                    console.error(error)
-                })
             }
         }
     }
