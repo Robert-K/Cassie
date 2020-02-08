@@ -22,7 +22,7 @@ def run(callback):
         if ser.inWaiting() > 0:
             reading = ser.read(ser.inWaiting())
             line += reading
-            if reading == b'\n':
+            if reading == b'\n' and line != b'\n':
                 callback(line[:-3].decode())
                 line = b''
         sleep(0.01)
