@@ -11,7 +11,8 @@
                     <b-modal id="undo-modal" title="You are about to permanently undo this transaction.">
                         <b-img class="shadow" fluid :src="require('@/assets/images/gifs/invisible.gif')"/>
                         <template v-slot:modal-footer>
-                            <b-button block size="lg" variant="danger" @click="undoTransaction(undo_date)">
+                            <b-button block size="lg" variant="danger" @click="undoTransaction(undo_date)"
+                                      class="shadow">
                                 Undo transaction
                             </b-button>
                         </template>
@@ -46,7 +47,7 @@
                             <div/>
                         </template>
                         <template v-slot:cell(undo)="data">
-                            <b-button :id="'button-undo-transaction' + data.index" variant="danger"
+                            <b-button :id="'button-undo-transaction' + data.index" variant="danger" class="shadow"
                                       v-if="isLessThenHalfAnHourAgo(data.item.date)"
                                       @click="showUndoModal(data.item.date)">Undo
                             </b-button>
