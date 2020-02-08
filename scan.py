@@ -12,7 +12,7 @@ ETX = 0x03
 
 
 def run(callback):
-    ser = serial.Serial(SCANNER_PATH, BAUD, timeout=0)
+    ser = serial.Serial(SCANNER_PATH, BAUD, timeout=0, rtscts=True, dsrdtr=True)
 
     atexit.register(ser.close)
 
