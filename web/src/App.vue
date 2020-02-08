@@ -30,7 +30,7 @@
                 }, false)
             },
             CDPclock() {
-                if (this.show_clock) {
+                if (this.show_clock === true) {
                     moment.locale('de')
                     this.CDPset({
                         top: {center: moment().format("HH:mm")},
