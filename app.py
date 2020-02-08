@@ -27,7 +27,8 @@ def send_code(barcode):
 
 
 @app.route('/cdp', methods=['POST'])
-def post_cdp(data):
+def post_cdp():
+    data = request.json
     top = ''
     bottom = ''
     if 'top' in data:
