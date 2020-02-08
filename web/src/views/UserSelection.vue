@@ -121,6 +121,7 @@
         name: 'user-selection',
         created() {
             this.getUsers()
+            this.$parent.CDPclock()
         },
         data() {
             return {
