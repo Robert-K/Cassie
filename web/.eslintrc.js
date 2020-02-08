@@ -8,8 +8,9 @@ module.exports = {
     'eslint:recommended'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV = 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-console': 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/no-side-effects-in-computed-properties': 1
   },
   parserOptions: {
     parser: 'babel-eslint'
