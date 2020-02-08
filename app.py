@@ -7,6 +7,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import json, atexit, time
 import subprocess
+import cdp
 
 USERS_PATH = 'data/users.json'
 ITEMS_PATH = 'data/items.json'
@@ -24,10 +25,34 @@ CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
 def send_code(barcode):
     sio.emit('codeScanned', barcode)
 
+
+@app.route('/cdp', methods=['POST'])
+def post_cdp(data):
+    top = ''
+    bottom = ''
+    if 'top' in data:
+        if 'center' in data['top']:
+            top = data['top']['center']
+        elif 'right' in data['top']:
+            top = cdp.merge(cdp.left(data['top']['left']), cdp.right(data['top']['right']))
+        else:
+            top = data['top']
+    if 'bottom' in data:
+        if 'center' in data['bottom']:
+            bottom = data['bottom']['center']
+        elif 'right' in data['bottom']:
+            bottom = cdp.merge(cdp.left(data['bottom']['left']), cdp.right(data['bottom']['right']))
+        else:
+            bottom = data['bottom']
+    cdp.show(top, bottom)
+    return 'CDP updated!'
+
+
 @app.route('/screensaver', methods=['POST'])
 def post_screensaver():
     subprocess.run(["xscreensaver-command -activate"], shell=True)
     return 'Screensaver started!'
+
 
 @app.route('/<path:path>')
 def get_data(path):

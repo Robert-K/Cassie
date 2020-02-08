@@ -5,14 +5,21 @@
 </template>
 
 <script>
+    import axios from "axios"
+
+    const moment = require('moment');
+
     export default {
         created() {
             this.preventContextMenu()
+            this.clockCDP()
+            this.clockID = setInterval(this.clockCDP, 60 * 1000)
         },
         data() {
             return {
                 host: 'http://localhost:5000',
-                selected_user: null
+                selected_user: null,
+                clockID: null
             }
         },
         methods: {
@@ -20,6 +27,17 @@
                 document.addEventListener("contextmenu", function (e) {
                     e.preventDefault()
                 }, false)
+            },
+            clockCDP() {
+                moment.locale('de')
+                this.setCDP({top: {center: moment().format("HH:mm")}, bottom: {center: moment().format("Do MMMM YYYY")}})
+            },
+            setCDP(data, timeout) {
+                clearInterval(this.clockID)
+                axios.post(this.$parent.host + '/cdp', data).catch((error) => {
+                    console.log(error)
+                })
+                setTimeout(setInterval, timeout * 1000, this.clockCDP(), 60 * 1000);
             }
         }
     }
