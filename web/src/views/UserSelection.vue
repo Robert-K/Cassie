@@ -162,7 +162,7 @@
                 this.$parent.selected_user = user
                 this.$parent.CDPmessage({
                     top: {center: user.name},
-                    bottom: {center: this.formatPrice(user.balance)}}, 2)
+                    bottom: {center: (user.balance / 100).toFixed(2)}}, 2)
                 this.$router.push('item-selection')
             },
             formatPrice(value) {

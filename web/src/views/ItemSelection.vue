@@ -136,7 +136,7 @@
                     top: item_to_add.name,
                     bottom: {
                         left: item_to_add.variant !== null ? item_to_add.variant : '',
-                        right: this.formatPrice(item_to_add.price)
+                        right: (item_to_add.price / 100).toFixed(2)
                     }
                 }, 2)
             },

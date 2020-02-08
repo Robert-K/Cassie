@@ -113,6 +113,7 @@
             undoTransaction(date) {
                 this.$bvModal.hide('undo-modal')
                 axios.post(this.$parent.host + '/transactions/undo', {date: date}).then(() => {
+                    this.$parent.CDPmessage({top: 'Transaction undone!'}, 10)
                     this.getTransactions()
                 }).catch((error) => {
                     console.log(error)
