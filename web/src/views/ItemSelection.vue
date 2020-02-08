@@ -132,6 +132,13 @@
                     item_to_add.quantity = 1
                     this.selected_items.push(item_to_add)
                 }
+                this.$parent.CDPmessage({
+                    top: item_to_add.name,
+                    bottom: {
+                        left: (item_to_add.hasOwnProperty('variant') ? item_to_add.variant : ''),
+                        right: this.formatPrice(item_to_add.price)
+                    }
+                }, 2)
             },
             removeItem(item_to_remove) {
                 let matching_item = this.selected_items.filter(item => {
@@ -172,6 +179,7 @@
                     transaction.guest = true
                 }
                 axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
+                    this.$parent.CDPmessage({top: {center: 'Thanks for your'}, bottom: {center: 'purchase!'}}, 10)
                     this.$router.push('/')
                 }).catch((error) => {
                     console.log(error)

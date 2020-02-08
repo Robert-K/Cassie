@@ -200,6 +200,7 @@
                     'impact': this.payment_amount * 100
                 }
                 axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
+                    this.$parent.CDPmessage({top: {center: 'Payment added!'}}, 10)
                     this.$bvModal.hide('payment')
                 }).catch((error) => {
                     console.log(error)

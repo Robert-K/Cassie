@@ -12,14 +12,15 @@
     export default {
         created() {
             this.preventContextMenu()
-            this.clockCDP()
-            this.clockID = setInterval(this.clockCDP, 60 * 1000)
+            this.CDPclock()
+            this.clockID = setInterval(this.CDPclock, 60 * 1000)
         },
         data() {
             return {
                 host: 'http://localhost:5000',
                 selected_user: null,
-                clockID: null
+                clockID: null,
+                show_clock: true
             }
         },
         methods: {
@@ -28,16 +29,26 @@
                     e.preventDefault()
                 }, false)
             },
-            clockCDP() {
-                moment.locale('de')
-                this.setCDP({top: {center: moment().format("HH:mm")}, bottom: {center: moment().format("Do MMMM YYYY")}})
+            CDPclock() {
+                if (this.show_clock) {
+                    moment.locale('de')
+                    this.CDPset({
+                        top: {center: moment().format("HH:mm")},
+                        bottom: {center: moment().format("Do MMMM YYYY")}
+                    })
+                }
             },
-            setCDP(data, timeout) {
-                clearInterval(this.clockID)
+            CDPmessage(data, timeout) {
+                this.show_clock = false
+                this.CDPset(data)
+                setTimeout(() => {
+                    this.show_clock = true
+                }, timeout * 1000);
+            },
+            CDPset(data) {
                 axios.post(this.$parent.host + '/cdp', data).catch((error) => {
                     console.log(error)
                 })
-                setTimeout(setInterval, timeout * 1000, this.clockCDP(), 60 * 1000);
             }
         }
     }
