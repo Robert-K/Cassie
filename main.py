@@ -6,5 +6,4 @@ scan_thread = threading.Thread(target=scan.run, args=(app.send_code,), daemon=Tr
 
 if __name__ == '__main__':
     scan_thread.start()
-    print('Scan thread started.')
     app.run()

@@ -16,11 +16,16 @@ def run(callback):
 
     atexit.register(ser.close)
 
+    line = b''
+
     while True:
-        print("test")
-        line = ser.readline()
-        if line != b'\n':
-            callback(line[:-3].decode())
+        if ser.inWaiting() > 0:
+            reading = ser.read(ser.inWaiting())
+            line += reading
+            if reading == b'\n':
+                callback(line[:-3].decode())
+                line = b''
+        sleep(0.01)
 
 
 if __name__ == '__main__':
