@@ -131,6 +131,30 @@ def post_transactions_undo():
     return 'Transaction undone!'
 
 
+@app.route('/favorites/add', methods=['POST'])
+def post_favorites_add():
+    favorite = request.json
+    id = favorite['id']
+    barcode = favorite['barcode']
+
+    users['users'][id]['favorites'].append(barcode)
+
+    save_json(users, USERS_PATH)
+    return 'Favorite added!'
+
+
+@app.route('/favorites/remove', methods=['POST'])
+def post_favorites_remove():
+    favorite = request.json
+    id = favorite['id']
+    barcode = favorite['barcode']
+
+    users['users'][id]['favorites'].remove(barcode)
+
+    save_json(users, USERS_PATH)
+    return 'Favorite removed!'
+
+
 def load_json(path):
     with open(path, 'r', encoding='utf-8') as json_file:
         return json.load(json_file)

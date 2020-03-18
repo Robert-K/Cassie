@@ -6,7 +6,7 @@
                         @click="addItem(item)">
                     <b-card-body>
                         <h3>
-                            <font-awesome-icon class="like-icon"
+                            <font-awesome-icon class="like-icon" @click.stop="toggleFavorite(item.barcode)"
                                                :icon="[isFavorite(item.barcode) ? 'fas' : 'far','heart']"/>
                         </h3>
                         <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
@@ -209,6 +209,29 @@
                     }
                 })
                 return is_fave
+            },
+            toggleFavorite(barcode) {
+                if (!this.$parent.selected_user) return
+                if (!this.$parent.selected_user.favorites) return
+                if(this.isFavorite(barcode)) {
+                    let index = this.$parent.selected_user.favorites.indexOf(barcode)
+                    if (index > -1) {
+                        this.$parent.selected_user.favorites.splice(index, 1)
+                    }
+                    axios.post(this.$parent.host + '/favorites/remove', {id: this.$parent.selected_user.id, barcode: barcode}).then(() => {
+                        this.$parent.CDPmessage({top: {center: 'Favorite'}, bottom: {center: 'removed!'}}, 2)
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                } else {
+                    this.$parent.selected_user.favorites.push(barcode)
+                    axios.post(this.$parent.host + '/favorites/add', {id: this.$parent.selected_user.id, barcode: barcode}).then(() => {
+                        this.$parent.CDPmessage({top: {center: 'Favorite'}, bottom: {center: 'added!'}}, 2)
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }
+                this.getItems()
             }
         }
     }
