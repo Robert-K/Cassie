@@ -174,7 +174,7 @@
             },
             balanceColor(balance) {
                 let map = interpolate(['green', 'orange', 'red'])
-                return map(Math.max((-balance / 100) / 100, 0))
+                return map(Math.max((-balance / 100) / 30, 0))
             },
             getUsers() {
                 axios.get(this.$parent.host + '/users').then((res) => {
