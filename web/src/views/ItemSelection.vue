@@ -5,6 +5,10 @@
                 <b-card no-body v-for="item in items" :key="item.barcode" class="item-container mx-2 my-4 shadow"
                         @click="addItem(item)">
                     <b-card-body>
+                        <h3>
+                            <font-awesome-icon class="like-icon"
+                                               :icon="[isFavorite(item.barcode) ? 'fas' : 'far','heart']"/>
+                        </h3>
                         <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
                         <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image middle"/>
                         <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
@@ -88,7 +92,6 @@
         },
         data() {
             return {
-                users: null,
                 items: null,
                 selected_items: [],
                 fields: [
@@ -189,9 +192,23 @@
             getItems() {
                 axios.get(this.$parent.host + '/items').then((res) => {
                     this.items = res.data
+                    this.items.sort((a) => {
+                        return this.isFavorite(a.barcode) ? -1 : 1
+                    })
                 }).catch((error) => {
                     console.error(error)
                 })
+            },
+            isFavorite(barcode) {
+                if (!this.$parent.selected_user) return false
+                if (!this.$parent.selected_user.favorites) return false
+                let is_fave = false
+                this.$parent.selected_user.favorites.forEach((fave) => {
+                    if (barcode === fave) {
+                        is_fave = true
+                    }
+                })
+                return is_fave
             }
         }
     }
@@ -255,6 +272,11 @@
 
     .item-volume {
         margin-top: -5px;
+    }
+
+    .like-icon {
+        position: absolute;
+        right: 20px;
     }
 
     .purple-gradient {
