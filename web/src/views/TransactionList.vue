@@ -37,6 +37,7 @@
                         </template>
                     </b-modal>
                     <b-table no-border-collapse sticky-header="84vh" striped sort-by="date" sort-desc
+                             :sort-compare="sortByDate"
                              class="text-left mb-0"
                              :items="transactions" :fields="fields">
                         <template v-slot:head(payment)>
@@ -142,7 +143,14 @@
                 })
             },
             isLessThenHalfAnHourAgo(date) {
-                return moment().subtract(60, 'minutes') < moment(date, 'DD/MM/YYYY, HH:mm:ss')
+                return moment().subtract(60, 'minutes') < moment(date, 'DD.MM.YYYY, HH:mm:ss')
+            },
+            sortByDate(a, b, key) {
+                if (key !== 'date') {
+                    return false
+                }
+
+                return moment(a.date, 'DD/MM/YYYY, HH:mm:ss') - moment(b.date, 'DD.MM.YYYY, HH:mm:ss') > 0 ? 1 : -1
             }
         }
     }
