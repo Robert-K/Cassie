@@ -7,7 +7,10 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import json, atexit, time
 import subprocess
-import cdp
+import sys
+
+if 'nocdp' not in sys.argv:
+    import cdp
 
 USERS_PATH = 'data/users.json'
 ITEMS_PATH = 'data/items.json'
@@ -28,6 +31,8 @@ def send_code(barcode):
 
 @app.route('/cdp', methods=['POST'])
 def post_cdp():
+    if 'nocdp' not in sys.argv:
+        return 'CDP not connected!'
     data = request.json
     top = ''
     bottom = ''
