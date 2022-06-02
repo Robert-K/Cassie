@@ -198,3 +198,5 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,intellij
 
 /venv
+
+/data/transactions.json
