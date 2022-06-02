@@ -31,7 +31,7 @@ def send_code(barcode):
 
 @app.route('/cdp', methods=['POST'])
 def post_cdp():
-    if 'nocdp' not in sys.argv:
+    if 'nocdp' in sys.argv:
         return 'CDP not connected!'
     data = request.json
     top = ''
