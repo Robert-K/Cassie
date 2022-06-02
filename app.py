@@ -20,9 +20,9 @@ DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-sio = SocketIO(app, cors_allowed_origins='http://localhost:8080')
+sio = SocketIO(app, cors_allowed_origins='*')
 
-CORS(app, resources={r'/*': {'origins': 'http://localhost:8080'}})
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 def send_code(barcode):
