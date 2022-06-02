@@ -11,6 +11,10 @@ The system features a touch interface, liquid crystal customer display & usb bar
 
 It uses [Vue](https://vuejs.org/), [SocketIO](https://socket.io/), [Flask](https://flask.palletsprojects.com/) and stores data as [JSON](https://www.json.org/) files.
 
+<p align="center">
+<img src="screenshot_users.png" width="400"/> <img src="screenshot_pay.png" width="400"/> <img src="screenshot_buy.png" width="400"/> <img src="screenshot_transactions.png" width="400"/>
+</p>
+
 ## Setup
 
 ### Requirements:
