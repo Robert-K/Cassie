@@ -53,29 +53,29 @@
             </b-col>
             <b-col class="d-flex flex-column">
                 <b-row>
-                    <b-col v-for="user in sortedActiveUsers" :key="'active-' + user.id" cols="4"
+                    <b-col v-for="user in active_users" :key="'active-' + user.id" cols="4"
                            class="mb-3 pl-3 pr-0 text-muted">
                         <b-card no-body class="shadow" @click="selectUser(user)">
                             <b-card-body class="p-2">
                                 <h1 class="room-number"><b>{{user.room}}</b></h1>
                                 <div class="user-foreground text-left pl-2">
-                                    <h2>{{user.name}}</h2>
-                                    <h3 :style="{color: balanceColor(user.balance)}">
-                                        {{formatPrice(user.balance)}}</h3>
+                                    <h2>{{getUserByID(user.id).name}}</h2>
+                                    <h3 :style="{color: balanceColor(getUserByID(user.id).balance)}">
+                                        {{formatPrice(getUserByID(user.id).balance)}}</h3>
                                 </div>
                             </b-card-body>
                         </b-card>
                     </b-col>
                 </b-row>
                 <b-modal id="more-users" hide-header hide-footer body-class="pb-0">
-                    <b-card v-for="user in inactive_users" :key="'inactive-' + user.id" class="shadow mb-3 text-muted"
-                            @click="selectUser(user)">
+                    <b-card v-for="user in inactive_users" :key="'inactive-' + user" class="shadow mb-3 text-muted"
+                            @click="selectUser(getUserByID(user))">
                         <b-row>
                             <b-col>
-                                <h2>{{user.name}}</h2>
+                                <h2>{{getUserByID(user).name}}</h2>
                             </b-col>
-                            <b-col><h2 :style="{color: balanceColor(user.balance), float: 'right'}">
-                                {{formatPrice(user.balance)}}</h2>
+                            <b-col><h2 :style="{color: balanceColor(getUserByID(user).balance), float: 'right'}">
+                                {{formatPrice(getUserByID(user).balance)}}</h2>
                             </b-col>
                         </b-row>
                     </b-card>
@@ -100,13 +100,14 @@
     const interpolate = require('color-interpolate')
 
     export default {
-        name: 'user-selection',
+        name: 'user_selection',
         created() {
             this.getUsers()
             this.$parent.CDPclock()
         },
         data() {
             return {
+                all_users: [],
                 active_users: [],
                 inactive_users: [],
                 sorting_keys: ['Room', 'Balance'],
@@ -117,30 +118,26 @@
             }
         },
         computed: {
-            sortedActiveUsers() {
-                return this.active_users.sort((a, b) => {
-                    if (this.key === 0)
-                        return a.room - b.room
-                    else
-                        return a.balance - b.balance
-                })
-            },
-            paymentUserOptions() {
+            userOptions() {
                 let active = []
                 this.active_users.forEach((user) => {
                     active.push({
-                        value: user,
-                        text: user.name + (user.hasOwnProperty('room') ? ' i3' + user.room : '')
+                        value: this.getUserByID(user.id),
+                        text: this.getUserByID(user.id).name + ' i3' + user.room
                     })
                 })
                 let inactive = []
                 this.inactive_users.forEach((user) => {
-                    inactive.push({value: user, text: user.name})
+                    inactive.push({value: this.getUserByID(user), text: this.getUserByID(user).name})
                 })
                 return [{label: 'Active users', options: active}, {label: 'Inactive users', options: inactive}]
             }
         },
         methods: {
+            getUserByID(id) {
+                let user = this.all_users.find((user) => user.id === id)
+                return user
+            },
             selectUser(user) {
                 this.$parent.selected_user = user
                 this.$parent.CDPmessage({
@@ -160,14 +157,23 @@
             },
             getUsers() {
                 axios.get(this.$parent.host + '/users').then((res) => {
-                    res.data.users.forEach((user) => {
-                        if (user.id in res.data.active_users) {
-                            this.active_users.push(user)
-                        } else {
-                            this.inactive_users.push(user)
+                    this.all_users = res.data.users
+                    this.active_users = res.data.active
+                    this.all_users = this.all_users.sort(function (a, b) {
+                        if (a.name < b.name) {
+                            return -1;
                         }
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+                    this.all_users.forEach ((user) => {
+                        this.inactive_users.push(user.id)
                     })
-
+                    this.active_users.forEach ((user) => {
+                        this.inactive_users = this.inactive_users.filter((id) => id !== user.id)
+                    })
                 }).catch((error) => {
                     console.error(error)
                 })

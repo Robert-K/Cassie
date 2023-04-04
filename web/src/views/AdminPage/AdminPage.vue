@@ -33,7 +33,7 @@
                     <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
                     @click="addPayment">
                         Add Payment
-                    </b-button>
+                    </b-button> 
 
                     <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
                         @click="$router.push('/admin-page/user-management')">
@@ -60,36 +60,37 @@
 
 <script>
 import axios from "axios";
+import user_selection from './../UserSelection.vue';
     export default {
-        
-
         name: "Admin",
-        created() {
-            this.getUsers()
+        created(){
+            this.users=new user_selection();
         },
         data() {
             return {
-                active_users: [],
-                inactive_users: [],
+                users: user_selection.data(),
                 payment_user: null,
                 payment_amount: 0,
-
             }
         },
         computed: {
         paymentUserOptions() {
-                let active = []
-                this.active_users.forEach((user) => {
+            return null
+            //return user_selection.userOptions();
+
+                /*let active = []
+                this.users.active_users.forEach((user) => {
                     active.push({
-                        value: user,
-                        text: user.name + (user.hasOwnProperty('room') ? ' i3' + user.room : '')
+                        value: user_selection.getUserByID(user.id),
+                        text: user_selection.getUserByID(user.id).name + ' i3' + user.room
                     })
                 })
                 let inactive = []
-                this.inactive_users.forEach((user) => {
-                    inactive.push({value: user, text: user.name})
+                user_selection.data().inactive_users.forEach((user) => {
+                    inactive.push({value: user_selection.getUserByID(user), text: user_selection.getUserByID(user).name})
                 })
                 return [{label: 'Active users', options: active}, {label: 'Inactive users', options: inactive}]
+            }*/
             }
         },
         methods: {
@@ -106,20 +107,6 @@ import axios from "axios";
                         console.log(error)
                         this.$bvModal.hide('payment')
                     })
-            },
-            getUsers() {
-                axios.get(this.$parent.host + '/users').then((res) => {
-                    res.data.users.forEach((user) => {
-                        if (user.id in res.data.active_users) {
-                            this.active_users.push(user)
-                        } else {
-                            this.inactive_users.push(user)
-                        }
-                    })
-
-                }).catch((error) => {
-                    console.error(error)
-                })
             },
             addPayment() {
                 this.payment_user = null
