@@ -1,40 +1,22 @@
 <template>
     <div id="user-selection">
         <b-row class="py-4 px-3 full-height m-0" v-if="active_users != null">
-            <b-modal id="payment" hide-header hide-footer>
-                <h2 class="text-center text-muted">User</h2>
-                <b-form-select size="lg" class="shadow mb-3" v-model="payment_user"
-                               :options="paymentUserOptions"></b-form-select>
-                <h2 class="text-center text-muted">Amount in €</h2>
-                <b-input-group class="shadow mb-3">
-                    <b-input-group-prepend>
-                        <b-button variant="outline-secondary" @click="payment_amount = Math.max(payment_amount-1, 1)">
-                            <font-awesome-icon :icon="['fas','minus']"/>
-                        </b-button>
-                    </b-input-group-prepend>
-                    <b-form-input type="number" v-model="payment_amount" class="text-center" id="payment-amount"
-                                  :formatter="formatPayment" lazy-formatter size="lg"/>
-                    <b-input-group-append>
-                        <b-button variant="outline-secondary">
-                            <font-awesome-icon :icon="['fas','plus']" @click="payment_amount++"/>
-                        </b-button>
-                    </b-input-group-append>
-                </b-input-group>
-                <h2 class="text-center text-muted">Admin code</h2>
+            <b-modal id="enter-pin" hide-header hide-footer>
+                <h2 class="text-center text-muted">Pin</h2>
                 <div class="text-center">
                     <b-button-group size="md" class="mb-3 d-flex flex-row shadow">
                         <b-button variant="outline-secondary" v-for="number in 10" :key="'number-'+number"
-                                  @click="payment_code += number-1">
+                                  @click="pin_code += number-1">
                             <h3>{{number - 1}}</h3>
                         </b-button>
-                        <b-button variant="outline-secondary" @click="payment_code = payment_code.slice(0, -1)">
+                        <b-button variant="outline-secondary" @click="pin_code = pin_code.slice(0, -1)">
                             <font-awesome-icon :icon="['fas','backspace']"/>
                         </b-button>
                     </b-button-group>
                 </div>
-                <h2 class="text-center text-muted">{{payment_code}}</h2>
-                <b-button @click="pay" class="shadow" block size="lg" variant="success"
-                          :disabled="payment_user == null || payment_code !== '9312'"><h1>Confirm payment</h1>
+                <h2 class="text-center text-muted">{{pin_code}}</h2>
+                <b-button @click="admin" class="shadow" block size="lg" variant="success"
+                          :disabled="pin_code !== '9312'"><h1>Enter</h1>
                 </b-button>
             </b-modal>
             <b-col cols="3" class="d-flex flex-column px-0">
@@ -56,8 +38,8 @@
                         </b-button>
 
                         <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
-                                  @click="showPayment">
-                            Add payment
+                                  @click="showEnterPin">
+                            Admin
                         </b-button>
 
                         <b-button pill size="lg" block variant="outline-secondary" class="shadow mb-3"
@@ -131,7 +113,7 @@
                 key: 0,
                 payment_user: null,
                 payment_amount: 30,
-                payment_code: ''
+                pin_code: ''
             }
         },
         computed: {
@@ -190,26 +172,29 @@
                     console.error(error)
                 })
             },
-            showPayment() {
+            showEnterPin() {
                 this.payment_user = null
                 this.payment_amount = 30
-                this.payment_code = ''
-                this.$bvModal.show('payment')
+                this.pin_code = ''
+                this.$bvModal.show('enter-pin')
             },
-            pay() {
-                this.payment_code = ''
-                let transaction = {
-                    'user': this.payment_user,
-                    'payment': true,
-                    'impact': this.payment_amount * 100
-                }
-                axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
-                    this.$parent.CDPmessage({top: {center: 'Payment added!'}}, 10)
-                    this.$bvModal.hide('payment')
-                }).catch((error) => {
-                    console.log(error)
-                    this.$bvModal.hide('payment')
-                })
+            admin() {
+                this.pin_code = ''
+                this.$router.push('/admin-page')
+                /**
+                    et transaction = {
+                        'user': this.payment_user,
+                        'payment': true,
+                        'impact': this.payment_amount * 100
+                    }
+                    axios.post(this.$parent.host + '/transactions/add', transaction).then(() => {
+                        this.$parent.CDPmessage({top: {center: 'Payment added!'}}, 10)
+                        this.$bvModal.hide('payment')
+                    }).catch((error) => {
+                        console.log(error)
+                        this.$bvModal.hide('payment')
+                    })
+                */
             },
             screensaver() {
                 axios.post(this.$parent.host + '/screensaver').catch((error) => {

@@ -1,14 +1,29 @@
 [
     {
-        "price": 55,
+        "id": 0,
+        "amount": 12,
+        "boxprice": 720,
+        "pfand": 330,
+        "helga": 7,
+        "price": 65,
         "barcode": "4003904031909",
-        "name": "Bad Liebenzeller",
-        "image": "blz_grapefruit.png",
+        "name": "Wiesentaler Fruchtsaft Grape",
+        "image": "wiesentaler_grapefruit.png",
         "volume": 0.7,
         "variant": "Grapefruit light"
     },
     {
-        "price": 70,
+        "id": 1,
+        "price": 85,
+        "barcode": "0000000000000",
+        "name": "Paulaner Spezi",
+        "image": "paulaner_spezi.png",
+        "volume": 0.5,
+        "variant": null
+    },
+    {
+        "id": 2,
+        "price": 90,
         "barcode": "4260107220015",
         "name": "fritz-kola",
         "image": "fritz_kola.png",
@@ -16,7 +31,8 @@
         "variant": null
     },
     {
-        "price": 55,
+        "id": 3,
+        "price": 70,
         "barcode": "4004154069339",
         "name": "Burkhardt Eistee",
         "image": "bht_pfirsich.png",
@@ -24,7 +40,8 @@
         "variant": "Pfirsich"
     },
     {
-        "price": 55,
+        "id": 4,
+        "price": 70,
         "barcode": "4004154033330",
         "name": "Burkhardt Eistee",
         "image": "bht_granatapfel.png",
@@ -32,7 +49,8 @@
         "variant": "Granatapfel"
     },
     {
-        "price": 55,
+        "id": 5,
+        "price": 70,
         "barcode": "4004154035334",
         "name": "Burkhardt Eistee",
         "image": "bht_blaubeere.png",
@@ -40,7 +58,8 @@
         "variant": "Blaubeer"
     },
     {
-        "price": 55,
+        "id": 6,
+        "price": 65,
         "barcode": "4003904033804",
         "name": "Bad Liebenzeller ACE Saft",
         "image": "blz_ace.png",
@@ -48,7 +67,8 @@
         "variant": null
     },
     {
-        "price": 55,
+        "id": 7,
+        "price": 65,
         "barcode": "4003904033507",
         "name": "Bad Liebenzeller Apfelschorle",
         "image": "blz_apple.png",
@@ -56,7 +76,8 @@
         "variant": null
     },
     {
-        "price": 30,
+        "id": 8,
+        "price": 35,
         "barcode": "4003904031107",
         "name": "Bad Liebenzeller Mineralwasser",
         "image": "blz_classic.png",
@@ -64,7 +85,8 @@
         "variant": "Classic"
     },
     {
-        "price": 30,
+        "id": 9,
+        "price": 35,
         "barcode": "4003904031008",
         "name": "Bad Liebenzeller Mineralwasser",
         "image": "blz_medium.png",
@@ -72,6 +94,7 @@
         "variant": "Medium"
     },
     {
+        "id": 10,
         "price": 55,
         "barcode": "4003904031404",
         "name": "Bad Liebenzeller COLA-MIX",
@@ -80,7 +103,8 @@
         "variant": null
     },
     {
-        "price": 90,
+        "id": 11,
+        "price": 100,
         "barcode": "4105250022003",
         "name": "Augustinerbräu Lagerbier",
         "image": "augustiner_hell.png",
@@ -88,7 +112,8 @@
         "variant": "Hell"
     },
     {
-        "price": 70,
+        "id": 12,
+        "price": 60,
         "barcode": "4029764001807",
         "name": "CLUB-MATE",
         "image": "club_mate.png",
@@ -96,7 +121,8 @@
         "variant": null
     },
     {
-        "price": 90,
+        "id": 13,
+        "price": 100,
         "barcode": "4008109340504",
         "name": "hoepfner Kräusen",
         "image": "hoepfner_kraeusen.png",
@@ -104,7 +130,8 @@
         "variant": null
     },
     {
-        "price": 90,
+        "id": 14,
+        "price": 105,
         "barcode": "4260248223616",
         "name": "Chiemseer",
         "image": "chiemseer_hell.png",
@@ -112,7 +139,8 @@
         "variant": "Hell"
     },
     {
-        "price": 70,
+        "id": 15,
+        "price": 90,
         "barcode": "4260107220060",
         "name": "fritz-limo",
         "image": "fritz_limo_melone.png",
@@ -120,6 +148,7 @@
         "variant": "Honigmelone"
     },
     {
+        "id": 16,
         "price": 70,
         "barcode": "42278153",
         "name": "ASTRA URTYP",
@@ -128,7 +157,8 @@
         "variant": null
     },
     {
-        "price": 70,
+        "id": 17,
+        "price": 90,
         "barcode": "4260107220299",
         "name": "fritz-limo",
         "image": "fritz_limo_ahk.png",
@@ -136,13 +166,15 @@
         "variant": "Apfel Kirsch Holunder"
     },
     {
-        "price": 70,
+        "id": 18,
+        "price": 50,
         "barcode": "4029764001883",
         "name": "CLUB-MATE COLA",
         "image": "club_mate_cola.png",
         "volume": 0.33
     },
     {
+        "id": 19,
         "price": 70,
         "barcode": "41051825",
         "name": "Rothaus Tannenzäpfle",
@@ -150,75 +182,266 @@
         "volume": 0.33
     },
     {
-        "price": 10,
-        "barcode": "66666610",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "10 Cent"
-    },
-    {
-        "price": 20,
-        "barcode": "66666620",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "20 Cent"
-    },
-    {
-        "price": 50,
-        "barcode": "66666650",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "50 Cent"
-    },
-    {
-        "price": 80,
-        "barcode": "66666680",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "80 Cent"
-    },
-    {
+        "id": 20,
         "price": 100,
-        "barcode": "66666100",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "1 Euro"
+        "barcode": "4105120003903",
+        "name": "Weihenstephan Hefe Weissbier",
+        "image": "wsp_hefe_weiss.png",
+        "volume": 0.5
     },
     {
-        "price": 120,
-        "barcode": "66666120",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "1,20 Euro"
+        "id": 21,
+        "price": 65,
+        "barcode": "4035903026099",
+        "name": "Wiesentaler Johannisbeere",
+        "image": "wst_johannisbeere.png",
+        "volume": 0.7
     },
     {
-        "price": 140,
-        "barcode": "66666130",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "1,30 Euro"
+        "id": 22,
+        "price": 65,
+        "barcode": "4035903006091",
+        "name": "Wiesentaler Apfelschorle",
+        "image": "wst_apfelschorle.png",
+        "volume": 0.7
     },
     {
-        "price": 150,
-        "barcode": "66666150",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "1,50 Euro"
+        "id": 23,
+        "price": 35,
+        "barcode": "4035903001096",
+        "name": "Wiesentaler Mineralbrunnen",
+        "image": "wst_brunnen_classic.png",
+        "volume": 0.7,
+        "variant": "Classic"
     },
     {
+        "id": 24,
+        "price": 50,
+        "barcode": "4003904031404",
+        "name": "Bad Liebenzeller Organgenlimo",
+        "image": "blz_orange.png",
+        "volume": 0.7
+    },
+    {
+        "id": 25,
+        "price": 100,
+        "barcode": "5410041001204",
+        "name": "TUCs Original",
+        "image": "tucs_original.png",
+        "volume": 100
+    },
+    {
+        "id": 26,
+        "price": 100,
+        "barcode": "4001518112854",
+        "name": "Chocolate Mountain Cookies",
+        "image": "cm_cookies.png",
+        "volume": 150,
+        "variant": "Classic"
+    },
+    {
+        "id": 27,
+        "price": 12,
+        "barcode": "5000159500234",
+        "name": "Celebrations",
+        "image": "celebrations.png",
+        "volume": 10
+    },
+    {
+        "id": 28,
+        "price": 10,
+        "barcode": "4000512403302",
+        "name": "Trolli World",
+        "image": "trolli_world.png",
+        "volume": 10
+    },
+    {
+        "id": 29,
+        "price": 60,
+        "barcode": "4001242000656",
+        "name": "Chio Red Paprika Chips",
+        "image": "chio_red_paprika_30.png",
+        "volume": 30
+    },
+    {
+        "id": 30,
         "price": 200,
-        "barcode": "66666200",
-        "name": "X Temporary Snacc",
-        "image": "temporary.png",
-        "volume": 666,
-        "variant": "2 Euro"
+        "barcode": "4017100737909",
+        "name": "Saltletts Sticks",
+        "image": "saltletts_150.png",
+        "volume": 150
+    },
+    {
+        "id": 31,
+        "price": 40,
+        "barcode": "4061458058971",
+        "name": "Sun Snacks Salzstangen",
+        "image": "sun_snacks_sstangen.png",
+        "volume": 250
+    },
+    {
+        "id": 32,
+        "price": 80,
+        "barcode": "4061458018760",
+        "name": "American Style Cookies",
+        "image": "american_cookies.png",
+        "volume": 225
+    },
+    {
+        "id": 33,
+        "price": 30,
+        "barcode": "4444448018760",
+        "name": "Sun Snacks Cracker",
+        "image": "sun_snacks_cracker.png",
+        "volume": 75
+    },
+    {
+        "id": 34,
+        "price": 150,
+        "barcode": "4003586000316",
+        "name": "funny frisch Chipsfrisch",
+        "variant": "ungarisch",
+        "image": "chipsfrisch_ungarisch.png",
+        "volume": 175
+    },
+    {
+        "id": 35,
+        "price": 100,
+        "barcode": "4017100370007",
+        "name": "Leibniz Original Butterkekse",
+        "image": "leibniz_butterkekse.png",
+        "volume": 200
+    },
+    {
+        "id": 36,
+        "price": 140,
+        "barcode": "5449000017888",
+        "name": "Coca Cola",
+        "image": "cola_1l.png",
+        "volume": 1
+    },
+    {
+        "id": 37,
+        "price": 119,
+        "barcode": "3045140105502",
+        "name": "Milka",
+        "image": "milka_botschaft.png",
+        "volume": 100,
+        "variant": "Zarte Botschaft"
+    },
+    {
+        "id": 38,
+        "price": 119,
+        "barcode": "3045140118502",
+        "name": "Milka",
+        "image": "milka_haselnuesse.png",
+        "volume": 100,
+        "variant": "Ganze Haselnüsse"
+    },
+    {
+        "id": 39,
+        "price": 119,
+        "barcode": "7622210007469",
+        "name": "Milka",
+        "image": "milka_lu.png",
+        "volume": 100,
+        "variant": "LU"
+    },
+    {
+        "id": 40,
+        "price": 119,
+        "barcode": "4025700001030",
+        "name": "Milka",
+        "image": "milka_noisette.png",
+        "volume": 100,
+        "variant": "Noisette"
+    },
+    {
+        "id": 41,
+        "price": 119,
+        "barcode": "7622300617820",
+        "name": "Milka",
+        "image": "milka_oreo.png",
+        "volume": 100,
+        "variant": "Oreo"
+    },
+    {
+        "id": 42,
+        "price": 119,
+        "barcode": "7622210007476",
+        "name": "Milka",
+        "image": "milka_tuc.png",
+        "volume": 100,
+        "variant": "Tuc"
+    },
+    {
+        "id": 43,
+        "price": 119,
+        "barcode": "7622400005190",
+        "name": "Milka",
+        "image": "milka_kuhflecken.png",
+        "volume": 100,
+        "variant": "Kuhflecken"
+    },
+    {
+        "id": 44,
+        "price": 90,
+        "barcode": "4061458165334",
+        "name": "Rio d'oro Fruchtgummi",
+        "image": "milka_kuhflecken.png",
+        "volume": 200,
+        "variant": "Orange"
+    },
+    {
+        "id": 45,
+        "price": 90,
+        "barcode": "4061458165358",
+        "name": "Rio d'oro Fruchtgummi",
+        "image": "milka_kuhflecken.png",
+        "volume": 200,
+        "variant": "Purple"
+    },
+    {
+        "id": 46,
+        "price": 90,
+        "barcode": "4061458165341",
+        "name": "Rio d'oro Fruchtgummi",
+        "image": "milka_kuhflecken.png",
+        "volume": 200,
+        "variant": "Green"
+    },
+    {
+        "id": 47,
+        "price": 30,
+        "barcode": "3123123123123",
+        "name": "Sun Snacks Cracker",
+        "image": "cracker_mehrkorn.png",
+        "volume": 75,
+        "variant": "Mehrkorn"
+    },
+    {
+        "id": 48,
+        "price": 70,
+        "barcode": "4061458056526",
+        "name": "Farmer Erdnüsse im Teigmantel",
+        "image": "erdnuesse_teigmantel.png",
+        "volume": 170,
+        "variant": "Paprika"
+    },
+    {
+        "id": 49,
+        "price": 90,
+        "barcode": "4008948027000",
+        "name": "JEVER Pilsener",
+        "image": "jever_pilsener.png",
+        "volume": 0.5
+    },
+    {
+        "id": 50,
+        "price": 100,
+        "barcode": "4008109436306",
+        "name": "Höpfner Radler",
+        "image": "grape_radler.png",
+        "volume": 0.33
     }
 ]

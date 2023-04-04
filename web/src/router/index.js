@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import UserSelection from '../views/UserSelection.vue'
 import ItemSelection from "../views/ItemSelection";
 import TransactionList from "../views/TransactionList";
+import AdminPage from "../views/AdminPage/AdminPage";
+import UserManagement from "../views/AdminPage/UserManagement";
+import ItemManagement from "../views/AdminPage/ItemManagement";
 
 Vue.use(VueRouter)
 
@@ -21,6 +24,21 @@ const routes = [
         path: '/transaction-list',
         name: 'transaction-list',
         component: TransactionList
+    },
+    {
+        path: '/admin-page',
+        name: 'admin-page',
+        component: AdminPage
+    },
+    {
+        path: '/admin-page/user-management',
+        name: 'user-management',
+        component: UserManagement
+    },
+    {
+        path: '/admin-page/item-management',
+        name: 'item-management',
+        component: ItemManagement
     }
 ]
 

@@ -85,6 +85,20 @@ def get_data(path):
             return 'Invalid path!'
     return jsonify(result)
 
+@app.route('/users/add', methods=['POST'])
+def post_users_add():
+    user = request.json
+    max_id = 0
+    for index, user in enumerate(users['users']):
+        if user['id'] > max_id:
+            max_id = user['id']
+    user['id'] = max_id+1
+
+    users['user'].append(user)
+
+    save_json(transactions, TRANSACTIONS_PATH)
+    save_json(users, USERS_PATH)
+    return 'Transaction received!'
 
 @app.route('/transactions/add', methods=['POST'])
 def post_transactions_add():
@@ -159,6 +173,11 @@ def post_favorites_remove():
     save_json(users, USERS_PATH)
     return 'Favorite removed!'
 
+def get_user_by_id(id):
+    for user in users['users']:
+        if user['id'] == id:
+            return user
+    return None
 
 def load_json(path):
     with open(path, 'r', encoding='utf-8') as json_file:

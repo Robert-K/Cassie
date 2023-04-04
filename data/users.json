@@ -1,184 +1,306 @@
 {
+    "active": [
+        {
+            "room_nr": "01",
+            "id": 9
+        },
+        {
+            "room_nr": "02",
+            "id": 13
+        },
+        {
+            "room_nr": "03",
+            "id": 1
+        },
+        {
+            "room_nr": "04",
+            "id": 2
+        },
+        {
+            "room_nr": "05",
+            "id": 3
+        },
+        {
+            "room_nr": "06",
+            "id": 10
+        },
+        {
+            "room_nr": "07",
+            "id": 14
+        },
+        {
+            "room_nr": "08",
+            "id": 7
+        },
+        {
+            "room_nr": "09",
+            "id": 8
+        },
+        {
+            "room_nr": "10",
+            "id": 11
+        },
+        {
+            "room_nr": "11",
+            "id": 4
+        },
+        {
+            "room_nr": "12",
+            "id": 0
+        },
+        {
+            "room_nr": "13",
+            "id": 5
+        },
+        {
+            "room_nr": "14",
+            "id": 12
+        },
+        {
+            "room_nr": "15",
+            "id": 6
+        }
+    ],
     "users": [
         {
-            "name": "Robert",
             "id": 0,
-            "room": "12",
-            "balance": -331,
+            "name": "Robert",
+            "deposit": 30,
+            "balance": 27863,
             "favorites": [
-                "4004154069339",
-                "4004154033330",
-                "4004154035334"
+                "4260107220015",
+                "4105250022003",
+                "4003904033804",
+                "41051825"
             ]
         },
         {
-            "name": "Peter",
             "id": 1,
-            "room": "03",
-            "balance": -10,
-            "favorites": []
+            "name": "Anton",
+            "deposit": 30,
+            "balance": 18973,
+            "favorites": [
+                "4003904033507",
+                "4008109340504",
+                "4003904033804",
+                "4260107220015",
+                "4003904031008",
+                "3045140118502",
+                "41051825"
+            ]
         },
         {
-            "name": "Mr. Bean",
             "id": 2,
-            "room": "04",
-            "balance": -200,
-            "favorites": []
+            "name": "Jakob",
+            "deposit": 0,
+            "balance": 875,
+            "favorites": [
+                "4003904033804",
+                "41051825",
+                "4035903026099"
+            ]
         },
         {
-            "name": "Satan",
             "id": 3,
-            "room": "07",
-            "balance": -1120,
+            "name": "Lennart",
+            "deposit": 0,
+            "balance": 0,
             "favorites": []
         },
         {
-            "name": "Jesus",
             "id": 4,
-            "room": "09",
-            "balance": -310,
+            "name": "Louay",
+            "deposit": 0,
+            "balance": 2131,
             "favorites": []
         },
         {
-            "name": "Obi-Wan",
             "id": 5,
-            "room": "13",
-            "balance": -582,
-            "favorites": []
+            "name": "Philipp",
+            "deposit": 30,
+            "balance": -329,
+            "favorites": [
+                "4260107220015",
+                "4003904031107",
+                "4105250022003",
+                "41051825",
+                "5410041001204",
+                "4001242000656",
+                "4003904033804",
+                "4444448018760"
+            ]
         },
         {
-            "name": "Bob",
             "id": 6,
-            "room": "15",
-            "balance": 389,
+            "name": "Fabian",
+            "deposit": 30,
+            "balance": -1688,
             "favorites": []
         },
         {
-            "name": "Solanum",
             "id": 7,
-            "room": "08",
-            "balance": 12,
+            "name": "Pablo",
+            "deposit": 0,
+            "balance": 300,
             "favorites": []
         },
         {
-            "name": "Feldspar",
             "id": 8,
-            "room": "11",
-            "balance": 5123,
-            "favorites": []
+            "name": "Gerda",
+            "deposit": 0,
+            "balance": -1591,
+            "favorites": [
+                "4105250022003"
+            ]
         },
         {
-            "name": "Jessica",
             "id": 9,
-            "room": "01",
-            "balance": -1020312,
+            "name": "Celinne",
+            "deposit": 30,
+            "balance": -1095,
             "favorites": []
         },
         {
-            "name": "Garfield",
             "id": 10,
-            "room": "06",
-            "balance": -3123,
+            "name": "Jismon",
+            "deposit": 0,
+            "balance": -60,
             "favorites": []
         },
         {
-            "name": "Adam",
             "id": 11,
-            "room": "10",
-            "balance": -127,
-            "favorites": []
+            "name": "Farokh",
+            "deposit": 30,
+            "balance": -3105,
+            "favorites": [
+                "4003904033804",
+                "3045140105502",
+                "4003904031008",
+                "4260107220015",
+                "4004154069339",
+                "4105250022003"
+            ]
         },
         {
-            "name": "Eve",
             "id": 12,
-            "room": "14",
-            "balance": -111,
+            "name": "Dani",
+            "deposit": 0,
+            "balance": -330,
             "favorites": []
         },
         {
-            "name": "Eric",
             "id": 13,
-            "room": "02",
-            "balance": -666,
-            "favorites": []
+            "name": "Tobias",
+            "deposit": 0,
+            "balance": -1443,
+            "favorites": [
+                "4003904033804",
+                "4003904033507",
+                "4105120003903",
+                "4003904031008",
+                "41051825",
+                "4029764001807",
+                "4003904031909"
+            ]
         },
         {
-            "name": "Anakin",
             "id": 14,
-            "room": "05",
-            "balance": -1337,
-            "favorites": []
+            "name": "Laura",
+            "deposit": 30,
+            "balance": -753,
+            "favorites": [
+                "41051825",
+                "3123123123123",
+                "4035903001096",
+                "4105250022003"
+            ]
         },
         {
-            "name": "Dickus",
+            "name": "Sarah Quitsch",
             "id": 15,
-            "balance": -2048,
+            "balance": -4145,
             "favorites": []
         },
         {
-            "name": "King Kong",
+            "name": "Paul",
             "id": 16,
-            "balance": -6969,
+            "balance": -1860,
             "favorites": []
         },
         {
-            "name": "Longus",
+            "name": "Lukas",
             "id": 17,
-            "balance": -240,
+            "balance": -1100,
             "favorites": []
         },
         {
-            "name": "Jar Jar",
+            "name": "Janek",
             "id": 18,
-            "balance": 420,
+            "balance": -3488,
             "favorites": []
         },
         {
-            "name": "Faith",
+            "name": "Manuel",
             "id": 19,
-            "balance": 12345,
+            "balance": -3315,
             "favorites": []
         },
         {
-            "name": "Corvo",
+            "name": "Clara (ex05)",
             "id": 20,
-            "balance": -1234,
+            "balance": -1242,
             "favorites": []
         },
         {
-            "name": "Minas",
+            "name": "Marianna",
             "id": 21,
-            "balance": 999,
+            "balance": -3605,
             "favorites": []
         },
         {
-            "name": "Riebeck",
+            "name": "Juncong Fei",
             "id": 22,
-            "balance": -123,
+            "balance": -2555,
             "favorites": []
         },
         {
-            "name": "Gabbro",
+            "name": "Marcel",
             "id": 23,
-            "balance": -932,
+            "balance": -3006,
+            "favorites": [
+                "4260107220015"
+            ]
+        },
+        {
+            "name": "Arnaud (ex08)",
+            "id": 24,
+            "balance": -2395,
             "favorites": []
+        },
+        {
+            "name": "Sandra (ex11)",
+            "id": 25,
+            "balance": -1183,
+            "favorites": []
+        },
+        {
+            "name": "James (ex14)",
+            "id": 26,
+            "balance": 95,
+            "favorites": []
+        },
+        {
+            "name": "Linus (ex07)",
+            "id": 27,
+            "balance": -9,
+            "favorites": [
+                "4029764001807",
+                "4008109340504",
+                "4105250022003",
+                "41051825",
+                "4260107220015",
+                "4003904031008"
+            ]
         }
-    ],
-    "active_users": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14
     ]
 }

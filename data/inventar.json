@@ -1,0 +1,17 @@
+{
+    "inventory": [
+        {
+            "id": 6,
+            "quantity": 10
+        },
+        {
+            "id": 8,
+            "quantity": 7
+        }
+    ],
+    "cash": 2000,
+    "pfand": 3000,
+    "deposit": 5000,
+    "depts": 5000,
+    "comments": ["deposit and depts need to be corresponding to users balance and deposit flags"]
+}

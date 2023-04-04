@@ -9,9 +9,9 @@
                             <font-awesome-icon class="like-icon" @click.stop="toggleFavorite(item.barcode)"
                                                :icon="[isFavorite(item.barcode) ? 'fas' : 'far','heart']"/>
                         </h3>
-                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
-                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image middle"/>
-                        <b-img :src="require('@/assets/images/items/'+item.image)" class="item-image"/>
+                        <b-img :src="'@/assets/images/items/'+item.image" @error="$event.target.src='src/assets/images/items/placeholder.png'" class="item-image"/>
+                        <b-img :src="'@/assets/images/items/'+item.image" @error="$event.target.src='src/assets/images/items/placeholder.png'" class="item-image middle"/>
+                        <b-img :src="'@/assets/images/items/'+item.image" @error="$event.target.src='src/assets/images/items/placeholder.png'" class="item-image"/>
                         <b-img :src="require('@/assets/images/bottle_shadow.png')" class="bottle-shadow"/>
                         <b-card-text class="text-left">
                             <div class="item-values">
